@@ -13,7 +13,7 @@
         "name": "Yegor Bugayenko"
       },
       "category": "productivity",
-      "description": "Six skills for disciplined GitHub workflows: filing bugs, classifying bug reports, writing commit messages, submitting pull requests, reviewing pull requests, and answering reviewer comments",
+      "description": "Seven skills for disciplined GitHub workflows: filing bugs, classifying bug reports, writing commit messages, submitting pull requests, reviewing pull requests, answering reviewer comments, and orchestrating one daily contribution",
       "homepage": "https://github.com/yegor256/zealot",
       "keywords": [
         "skills",
@@ -28,12 +28,13 @@
       "name": "zealot",
       "repository": "https://github.com/yegor256/zealot",
       "skills": [
-        "./submit-pull-request",
-        "./make-git-commit",
-        "./address-reviewers-comments",
-        "./file-bug-report",
-        "./review-pull-request",
-        "./classify-bug-report"
+        "./skills/submit-pull-request",
+        "./skills/make-git-commit",
+        "./skills/address-reviewers-comments",
+        "./skills/file-bug-report",
+        "./skills/review-pull-request",
+        "./skills/classify-bug-report",
+        "./skills/make-one-contribution"
       ],
       "source": "./",
       "version": "0.1.0"
