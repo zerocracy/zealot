@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+[files]
+extend-exclude = ["coder/polish-code-base/SKILL.md"]
