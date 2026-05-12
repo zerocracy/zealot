@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+version = 1
+[[annotations]]
+path = [
+    "**/*.md",
+    "**/*.txt",
+    ".claude-plugin/marketplace.json",
+    ".claude-plugin/plugin.json"
+]
+precedence = "override"
+SPDX-FileCopyrightText = "Copyright (c) 2026 Yegor Bugayenko"
+SPDX-License-Identifier = "MIT"

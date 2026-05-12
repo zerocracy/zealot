@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "description": "Zealot: disciplined skills for filing bugs, classifying bug reports, writing commits, submitting pull requests, reviewing pull requests, and answering reviewer comments",
+  "name": "zealot",
+  "owner": {
+    "email": "yegor256@gmail.com",
+    "name": "Yegor Bugayenko"
+  },
+  "plugins": [
+    {
+      "author": {
+        "email": "yegor256@gmail.com",
+        "name": "Yegor Bugayenko"
+      },
+      "category": "productivity",
+      "description": "Six skills for disciplined GitHub workflows: filing bugs, classifying bug reports, writing commit messages, submitting pull requests, reviewing pull requests, and answering reviewer comments",
+      "homepage": "https://github.com/yegor256/zealot",
+      "keywords": [
+        "skills",
+        "github",
+        "code-review",
+        "pull-requests",
+        "bug-reports",
+        "commits",
+        "automation"
+      ],
+      "license": "MIT",
+      "name": "zealot",
+      "repository": "https://github.com/yegor256/zealot",
+      "skills": [
+        "./submit-pull-request",
+        "./make-git-commit",
+        "./address-reviewers-comments",
+        "./file-bug-report",
+        "./review-pull-request",
+        "./classify-bug-report"
+      ],
+      "source": "./",
+      "version": "0.1.0"
+    }
+  ]
+}

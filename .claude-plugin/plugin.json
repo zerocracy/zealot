@@ -1,0 +1,21 @@
+{
+  "author": {
+    "email": "yegor256@gmail.com",
+    "name": "Yegor Bugayenko"
+  },
+  "description": "Six skills for disciplined GitHub workflows: filing bugs, classifying bug reports, writing commit messages, submitting pull requests, reviewing pull requests, and answering reviewer comments",
+  "homepage": "https://github.com/yegor256/zealot",
+  "keywords": [
+    "skills",
+    "github",
+    "code-review",
+    "pull-requests",
+    "bug-reports",
+    "commits",
+    "automation"
+  ],
+  "license": "MIT",
+  "name": "zealot",
+  "repository": "https://github.com/yegor256/zealot",
+  "version": "0.1.0"
+}
