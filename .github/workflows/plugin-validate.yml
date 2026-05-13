@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+---
+# yamllint disable rule:line-length
+name: plugin-validate
+'on':
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  plugin-validate:
+    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install check-jsonschema
+      - name: plugin.json parses and declares name + version
+        run: |
+          jq -e '.name and .version' .claude-plugin/plugin.json > /dev/null || { echo "plugin.json missing name or version"; exit 1; }
+      - name: validate marketplace.json against schemastore schema
+        run: check-jsonschema --schemafile https://json.schemastore.org/claude-code-marketplace.json .claude-plugin/marketplace.json
+      - name: every skill directory has a SKILL.md
+        run: |
+          set -e
+          for d in skills/*/; do
+            test -f "$d/SKILL.md" || { echo "missing SKILL.md in $d"; exit 1; }
+          done
+      - name: every SKILL.md declares name and description
+        run: |
+          set -e
+          for f in skills/*/SKILL.md; do
+            awk '/^---$/{c++; next} c==1' "$f" | grep -q '^name:' || { echo "$f missing name"; exit 1; }
+            awk '/^---$/{c++; next} c==1' "$f" | grep -q '^description:' || { echo "$f missing description"; exit 1; }
+          done

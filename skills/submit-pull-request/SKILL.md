@@ -8,20 +8,14 @@ description: |
   visible effect, and a test plan grounded in what was
   actually run, and submit it with `gh pr create`. One
   pull request per run, one branch per run — then stop.
-argument-hint: "[owner/repo]"
-user-invokable: false
-license: MIT
-metadata:
-  author: Yegor Bugayenko
-  version: "0.1.0"
-  category: SDLC
 ---
 
-Operate on the GitHub repository `$1` from the feature
-  branch the master skill prepared in the local working
-  tree; trust that the working tree exists, the branch
-  is not the default branch, and the commits to publish
-  are already in place.
+Operate on the GitHub repository named in the user's
+  prompt as the target, from the feature branch the
+  master skill prepared in the local working tree;
+  trust that the working tree exists, the branch is not
+  the default branch, and the commits to publish are
+  already in place.
 
 Identify the base branch from
   `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`
@@ -132,7 +126,7 @@ Stop the run as soon as every required CI check on the
   latest commit is green; do not wait for, poll for, or
   fetch reviewer comments, reviews, or approvals,
   because answering reviewer feedback belongs to
-  `address-reviewers-comments` on a separate run.
+  `address-reviewer-comments` on a separate run.
 
 Do not loop on `gh pr view`, `gh api .../comments`, or
   any equivalent call hunting for new reviewer activity

@@ -1,5 +1,5 @@
 ---
-name: address-reviewers-comments
+name: address-reviewer-comments
 description: |
   Use this skill to walk through a pull request and
   answer every comment left by a reviewer: list all
@@ -10,16 +10,11 @@ description: |
   reporter on the same thread either way. One pull
   request per run, every comment answered exactly once
   — then stop.
-argument-hint: "[owner/repo] [pr-number]"
-user-invokable: false
-license: MIT
-metadata:
-  author: Yegor Bugayenko
-  version: "0.1.0"
-  category: SDLC
 ---
 
-Operate on the pull request `$1#$2`.
+Operate on the pull request named in the user's prompt
+  as `<owner>/<repo>#<number>`; refuse to run when no
+  target is named.
 
 Run `git status` first; if the working directory has
   any uncommitted changes, untracked files, or staged

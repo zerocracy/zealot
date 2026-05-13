@@ -12,18 +12,24 @@ The single top-level entry point is `make-one-contribution`:
   request —
   delegates to the matching sub-skill, and stops.
 
-This plugin is meant for routines only — there is no CLI install step, no
-  `/plugin marketplace add`, no `/plugin install`; a routine pulls the
-  skills from this repository directly at run time.
+Two installation paths are supported.
 
-Reference the repository inside the routine prompt and invoke
-  `make-one-contribution` against the target repository, for example:
+For a Claude Routine, reference the repository inside the routine prompt
+  and invoke `make-one-contribution` against the target repository,
+  for example:
 
 ```text
 Use this OAuth GitHub token: ghp_JI...tU.
 Use this GitHub repository to learn new skills: yegor256/zealot.
 Use this GitHub repository as the target: yegor256/foo.
 Use the make-one-contribution skill to make one contribution.
+```
+
+For Claude Code on a developer machine, install through the marketplace:
+
+```text
+/plugin marketplace add yegor256/zealot
+/plugin install zealot@zealot
 ```
 
 Configure the routine to run every day,

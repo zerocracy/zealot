@@ -8,16 +8,11 @@ description: |
   and submit one review verdict — APPROVE, COMMENT, or
   REQUEST_CHANGES — with a short summary. One pull
   request per run, one verdict per run — then stop.
-argument-hint: "[owner/repo] [pr-number]"
-user-invokable: false
-license: MIT
-metadata:
-  author: Yegor Bugayenko
-  version: "0.1.0"
-  category: SDLC
 ---
 
-Operate on the pull request `$1#$2`.
+Operate on the pull request named in the user's prompt
+  as `<owner>/<repo>#<number>`; refuse to run when no
+  target is named.
 
 Refuse to review a pull request that is already merged
   or closed; this skill leaves a verdict on an open

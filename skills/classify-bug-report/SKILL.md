@@ -8,16 +8,11 @@ description: |
   already defines, and apply them with `gh`. Do not
   close the issue, do not assign it, do not write a
   fix — only classify. One issue per run — then stop.
-argument-hint: "[owner/repo] [issue-number]"
-user-invokable: false
-license: MIT
-metadata:
-  author: Yegor Bugayenko
-  version: "0.1.0"
-  category: SDLC
 ---
 
-Operate on the GitHub issue `$1#$2`.
+Operate on the GitHub issue named in the user's prompt
+  as `<owner>/<repo>#<number>`; refuse to run when no
+  target is named.
 
 Refuse to classify an issue that is already closed
   unless the user explicitly asked for a retro-label;

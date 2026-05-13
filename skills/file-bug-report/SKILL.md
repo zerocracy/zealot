@@ -10,16 +10,11 @@ description: |
   fix, and post one short follow-up comment pinging the
   repository owner. One bug per run, one issue per run,
   one ping per run — then stop.
-argument-hint: "[owner/repo]"
-user-invokable: false
-license: MIT
-metadata:
-  author: Yegor Bugayenko
-  version: "0.1.0"
-  category: SDLC
 ---
 
-Operate on the GitHub repository `$1`.
+Operate on the GitHub repository named in the user's
+  prompt as the target; refuse to run when no target is
+  named.
 
 Clone or pull the repository's default branch into a
   local working directory before reading any code, so the
