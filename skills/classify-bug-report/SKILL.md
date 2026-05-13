@@ -19,11 +19,6 @@ metadata:
 
 Operate on the GitHub issue `$1#$2`.
 
-Refuse to classify a pull request as if it were an
-  issue; this skill labels bug reports, not change
-  proposals, and the `review-pull-request` skill exists
-  for the other case.
-
 Refuse to classify an issue that is already closed
   unless the user explicitly asked for a retro-label;
   a closed issue is out of the working backlog, and a
@@ -36,14 +31,6 @@ Fetch the issue body, the issue title, the existing
   `gh api repos/<owner>/<repo>/issues/<number>/comments`,
   so the classification is grounded in the full thread
   and not in the title alone.
-
-Stop the run immediately if the issue already carries a
-  primary kind label (`bug`, `enhancement`, `question`,
-  `duplicate`, `invalid`, or the repository's synonym
-  such as `feature`, `improvement`, `support`,
-  `wontfix`); a classified issue is out of this skill's
-  scope, and overriding a prior triage decision belongs
-  to the maintainer.
 
 Stop the run immediately if the issue thread already
   carries a comment posted by the same GitHub account

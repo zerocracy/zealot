@@ -17,66 +17,16 @@ metadata:
   category: SDLC
 ---
 
-Operate on the GitHub repository `$1` from the
-  currently checked-out branch; refuse to run if the
-  current directory is not a Git working tree, if the
-  branch is the default branch (`main` or `master`),
-  or if no upstream remote is configured.
-
-Run `git status` first; if the working directory has any
-  uncommitted changes, untracked files, or staged hunks,
-  stop immediately and ask the user to commit, stash, or
-  discard them, because every change in the diff must be
-  recorded in a commit before the pull request opens.
+Operate on the GitHub repository `$1` from the feature
+  branch the master skill prepared in the local working
+  tree; trust that the working tree exists, the branch
+  is not the default branch, and the commits to publish
+  are already in place.
 
 Identify the base branch from
   `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`
   rather than guessing `main` or `master`, because the
   repository may use a different default.
-
-Refuse to run on the base branch itself; this skill
-  opens a pull request from a feature branch, and a pull
-  request from the base branch into itself is a contract
-  violation.
-
-Refuse to run when an open pull request already exists
-  for the current branch
-  (`gh pr list --head <branch> --state open --json number`),
-  because two pull requests against the same head split
-  review across threads; ask the user to update the
-  existing one instead.
-
-Identify the linked issue, if any, from the branch name
-  (typical patterns: `<number>-...`, `issue-<number>`,
-  `fix-<number>`), from a `Closes #<number>` or
-  `Fixes #<number>` token in the branch's commit
-  messages, or from the input the user passed on the
-  run; skip the next three checks when no linked issue
-  surfaces, and apply them in full otherwise.
-
-Stop the run immediately if the linked issue is already
-  assigned to any GitHub account — read the `assignees`
-  array with
-  `gh issue view <number> --json assignees,author,comments`;
-  an assigned issue is taken, and submitting a parallel
-  pull request forks the effort and wastes review time.
-
-Stop the run immediately if any comment on the linked
-  issue announces intent to work on it — phrases such
-  as `I will take this`, `working on it`, `I am on it`,
-  `assigning to myself`, `let me handle this`, or any
-  equivalent claim posted by an account other than the
-  issue author — because the issue is already claimed
-  by another contributor.
-
-Stop the run immediately if the linked issue thread
-  already carries a comment posted by the same GitHub
-  account that runs this skill — resolve the login with
-  `gh api user --jq .login` and compare it against the
-  `user.login` field of every comment; a prior comment
-  from this account means the issue has already been
-  engaged on an earlier run, and a second submission
-  would duplicate the work.
 
 Fetch and rebase the branch onto the latest base
   (`git fetch origin && git rebase origin/<base>`) before

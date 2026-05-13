@@ -19,17 +19,6 @@ metadata:
 
 Operate on the pull request `$1#$2`.
 
-Run `git status` first; if the working directory has
-  any uncommitted changes, untracked files, or staged
-  hunks, stop immediately and do not continue, because
-  this skill checks out the pull request branch and a
-  dirty tree blocks the checkout.
-
-Refuse to review a pull request authored by the same
-  account that is running this skill; a self-review is a
-  conflict of interest, and the user can read their own
-  diff without a second pass.
-
 Refuse to review a pull request that is already merged
   or closed; this skill leaves a verdict on an open
   pull request, and a post-merge comment cannot block a
