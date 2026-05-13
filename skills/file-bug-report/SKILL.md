@@ -3,8 +3,9 @@ name: file-bug-report
 description: |
   Use this skill to file a single bug as a new GitHub
   issue against a specific repository — either a defect
-  the user has already named, or one found by reading the
-  source code with no builds and no tests. Confirm the
+  or a missing feature the user has already named, or
+  one found by reading the source code with no builds
+  and no tests. Confirm the
   bug is not a duplicate, write a concise report that
   names the symptom, points to the code, and suggests a
   fix, and post one short follow-up comment pinging the
@@ -69,6 +70,15 @@ When picking a defect from scratch, look for exactly one
   incompatible senses), or a defect (a crash path, a
   leaked resource, an unguarded null, a broken contract,
   a missing edge case).
+
+Treat the absence of a useful feature as a valid bug
+  too — a missing capability that users would clearly
+  benefit from, a workflow the product could obviously
+  support but does not, or a functional gap compared to
+  similar tools in the same category; file it the same
+  way as an explicit defect, with a concrete pointer to
+  the file or module where the new code would belong and
+  a one-sentence sketch of the proposed addition.
 
 Treat repository-level health issues as valid bug
   candidates too: one or more broken (red) CI jobs on
