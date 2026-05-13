@@ -126,7 +126,7 @@ Stop the run as soon as every required CI check on the
   latest commit is green; do not wait for, poll for, or
   fetch reviewer comments, reviews, or approvals,
   because answering reviewer feedback belongs to
-  `address-reviewer-comments` on a separate run.
+  `respond-to-comment` on a separate run.
 
 Do not loop on `gh pr view`, `gh api .../comments`, or
   any equivalent call hunting for new reviewer activity
