@@ -128,6 +128,18 @@ If the first CI run fails, fix the failure inside this
   submitted until every required check is green or until
   the user explicitly accepts a red status.
 
+Stop the run as soon as every required CI check on the
+  latest commit is green; do not wait for, poll for, or
+  fetch reviewer comments, reviews, or approvals,
+  because answering reviewer feedback belongs to
+  `address-reviewers-comments` on a separate run.
+
+Do not loop on `gh pr view`, `gh api .../comments`, or
+  any equivalent call hunting for new reviewer activity
+  after CI turns green; the contract of this skill ends
+  at green CI, and a later run picks up any feedback
+  that arrives.
+
 Report at the end of the run a short factual summary:
   the pull request URL, the base and head branches, the
   list of commits pushed during the run, and the final

@@ -3,15 +3,19 @@ name: make-one-contribution
 description: |
   Use this skill as the top-level entry point for a daily
   contribution run against a single GitHub repository:
-  inspect the repository's open issues, its unlabeled
-  issues, and its open pull requests, decide which one of
-  four contribution types the repository needs most —
-  file a bug report, classify an unlabeled issue, submit
-  a pull request, or review a pull request — pick a
-  single target
-  inside that type, delegate to the matching sub-skill,
-  and stop. One contribution per run, one sub-skill per
-  run — then stop.
+  first, check whether any pull request submitted earlier
+  by the current GitHub user is still waiting on a reply
+  to a reviewer comment, and if so delegate to
+  `address-reviewers-comments` and stop; only when no
+  such pull request exists, inspect the repository's open
+  issues, its unlabeled issues, and its open pull
+  requests, decide which one of four contribution types
+  the repository needs most — file a bug report, classify
+  an unlabeled issue, submit a pull request, or review a
+  pull request — pick a single target inside that type,
+  delegate to the matching sub-skill, and stop. One
+  contribution per run, one sub-skill per run — then
+  stop.
 argument-hint: "[owner/repo]"
 user-invokable: true
 license: MIT
@@ -49,6 +53,49 @@ Fetch the open pull requests with
   and count them; the total — the pull request queue
   size — drives the third branch of the decision.
 
+Identify the current GitHub login once with
+  `gh api user --jq .login` and capture it for the rest
+  of the run, because every check that filters pull
+  requests by author depends on this value.
+
+Fetch the open pull requests authored by the current
+  login with
+  `gh pr list --repo <owner>/<repo> --state open --author @me --limit 100 --json number,title,createdAt,updatedAt`,
+  because a pull request submitted on an earlier run
+  may still carry unanswered reviewer comments, and
+  finishing that thread ranks above every other
+  contribution type on this pass.
+
+Walk the list of own open pull requests oldest first
+  and, for each one, collect reviewer feedback from the
+  same three sources `address-reviewers-comments` uses
+  — inline review comments
+  (`gh api repos/<owner>/<repo>/pulls/<number>/comments`),
+  review-summary bodies
+  (`gh api repos/<owner>/<repo>/pulls/<number>/reviews`),
+  and issue-level comments
+  (`gh api repos/<owner>/<repo>/issues/<number>/comments`)
+  — so the count of unanswered feedback agrees with
+  what the sub-skill will see when it runs.
+
+Treat as not-reviewer-feedback any comment authored by
+  the pull request author themselves, by the bot that
+  opened the pull request, or by `github-actions[bot]`
+  when the body is a pure CI status echo; every other
+  comment counts as reviewer feedback.
+
+Treat a comment as unanswered when no later in-thread
+  reply from the pull request author exists on the same
+  thread; an emoji reaction does not count as an
+  answer, and a resolved-but-unreplied thread does not
+  count as an answer.
+
+Choose `address-reviewers-comments` first when at least
+  one open pull request authored by the current login
+  carries at least one unanswered reviewer comment,
+  because finishing an in-flight review ranks above
+  starting a new contribution on top of a stalled one.
+
 Choose `file-bug-report` when the backlog is short —
   ten or fewer open issues — because a short backlog
   means the repository can absorb a fresh bug report
@@ -69,21 +116,26 @@ Choose `review-pull-request` otherwise, because a long
   repository needs reviewers more than it needs new
   reports, fixes, or labels.
 
-Evaluate the four conditions in the order listed above
+Evaluate the five conditions in the order listed above
   and pick the first one that matches; do not score the
   conditions, do not combine them, and do not weight
-  them — the order is the decision.
+  them — the order is the decision, and
+  `address-reviewers-comments` always wins when it
+  matches.
 
 Pick a single target inside the chosen contribution
-  type before delegating: for `file-bug-report`, no
-  target is needed because the sub-skill picks the
-  defect itself; for `classify-bug-report`, pick the
-  oldest unlabeled open issue; for `submit-pull-request`,
-  pick the oldest open issue labeled `bug` or
-  `enhancement` that is unassigned and has no claimed
-  work in the thread; for `review-pull-request`, pick
-  the oldest open pull request not authored by the
-  account running this skill.
+  type before delegating: for `address-reviewers-comments`,
+  pick the oldest open pull request authored by the
+  current login that carries at least one unanswered
+  reviewer comment; for `file-bug-report`, no target is
+  needed because the sub-skill picks the defect itself;
+  for `classify-bug-report`, pick the oldest unlabeled
+  open issue; for `submit-pull-request`, pick the oldest
+  open issue labeled `bug` or `enhancement` that is
+  unassigned and has no claimed work in the thread; for
+  `review-pull-request`, pick the oldest open pull
+  request not authored by the account running this
+  skill.
 
 Delegate to the chosen sub-skill with the picked target
   as input, and let that sub-skill enforce its own
@@ -148,8 +200,11 @@ Stop after the delegated sub-skill finishes: do not
 Report at the end of the run a short factual summary:
   the repository, the contribution type chosen, the
   reason this branch of the decision was taken (the
-  backlog size, the unlabeled issue count, the pull
-  request queue size), the target picked, and the URL
-  of the artifact created or edited by the delegated
-  sub-skill — the new issue, the labeled issue, the
-  new pull request, or the review.
+  count of own open pull requests with unanswered
+  reviewer comments, the backlog size, the unlabeled
+  issue count, or the pull request queue size), the
+  target picked, and the URL of the artifact created
+  or edited by the delegated sub-skill — the pull
+  request whose comments were addressed, the new
+  issue, the labeled issue, the new pull request, or
+  the review.
