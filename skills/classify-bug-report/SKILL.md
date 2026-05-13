@@ -124,13 +124,21 @@ Never apply priority labels (`P0`, `P1`, `P2`,
   triage call.
 
 Post one comment on the issue before applying the
-  labels: explain in plain prose how the bug or the
-  enhancement could be fixed — name the file, the
-  function, or the change a maintainer would touch when
-  the evidence in the thread allows it — and answer the
-  question directly when the issue is a question,
-  citing the README or the source code rather than
-  guessing.
+  labels that contributes either criticism or support
+  to the report — never both, never neither — and keep
+  the tone neutral, because the job of the comment is
+  to help a future implementor decide how to resolve
+  the issue and to surface the risks they must weigh,
+  not to praise the reporter or to dismiss the report.
+
+Ground the comment in evidence from the thread and the
+  source code: name the file, the function, the test,
+  or the change a maintainer would touch; cite the
+  README, the contract, or the code when the issue is
+  a question; and call out the risks — broken tests,
+  behavior changes, backward incompatibility, security
+  exposure, performance regressions — that the
+  resolution would carry.
 
 Apply the chosen labels in one call with
   `gh issue edit <number> --add-label "<label1>,<label2>,..."`
