@@ -86,6 +86,38 @@ When picking a defect from scratch, look for exactly one
   leaked resource, an unguarded null, a broken contract,
   a missing edge case).
 
+Treat repository-level health issues as valid bug
+  candidates too: one or more broken (red) CI jobs on
+  `master`; a missing architecture section in the
+  `README.md` that would explain the product; an
+  architecture section that contradicts the actual code;
+  missing or insufficient linters, static analyzers, or
+  checkers wired into CI; noisy CI output that buries
+  real signal under excess logs; outdated dependencies
+  that can be upgraded; garbage files or unused
+  directories left in the tree; a file layout that
+  diverges from the de-facto standard for this type of
+  product; missing or unpublished test coverage;
+  published coverage below eighty percent; or typos and
+  grammar mistakes in code, comments, or documentation.
+
+Treat design inconsistencies as another class of bug —
+  lack of modularity, inadequate error handling,
+  inconsistent naming conventions, inadequate data
+  modeling, overlooked testability, poor exception
+  handling, overuse of global state, tight coupling to
+  external services, inadequate input validation,
+  insufficient documentation, lack of scalability, poor
+  concurrency management, poor resource management,
+  inconsistent coding styles, lack of code reuse,
+  insufficient logging, missing design patterns where
+  they would clearly apply, lack of automated testing,
+  poor separation of concerns, poor dependency
+  management, or overengineering — but only when the
+  symptom can be tied to specific files, directories, or
+  lines, and only when it is a demonstrable defect
+  rather than a matter of taste.
+
 Pick the single most concrete and verifiable finding
   from the candidates, and drop the rest — this skill
   files one bug per run, not a shortlist.
