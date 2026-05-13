@@ -45,6 +45,23 @@ Fetch the issue body, the issue title, the existing
   so the classification is grounded in the full thread
   and not in the title alone.
 
+Stop the run immediately if the issue already carries a
+  primary kind label (`bug`, `enhancement`, `question`,
+  `duplicate`, `invalid`, or the repository's synonym
+  such as `feature`, `improvement`, `support`,
+  `wontfix`); a classified issue is out of this skill's
+  scope, and overriding a prior triage decision belongs
+  to the maintainer.
+
+Stop the run immediately if the issue thread already
+  carries a comment posted by the same GitHub account
+  that runs this skill — resolve the account login with
+  `gh api user --jq .login` and compare it against the
+  `user.login` field of every comment; a prior comment
+  from this account means the issue has already been
+  handled on an earlier run, and a second pass would
+  duplicate the work.
+
 Fetch the catalogue of labels the repository already
   defines with `gh label list --repo <owner>/<repo> --limit 200`,
   and treat that list as the only vocabulary available
