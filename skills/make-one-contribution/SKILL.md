@@ -11,7 +11,13 @@ description: |
   inside that type, delegate to the matching sub-skill,
   and stop. One contribution per run, one sub-skill per
   run — then stop.
+argument-hint: "[owner/repo]"
 user-invokable: true
+license: MIT
+metadata:
+  author: Yegor Bugayenko
+  version: "0.1.0"
+  category: SDLC
 ---
 
 Operate on the GitHub repository `$1`; refuse to run

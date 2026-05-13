@@ -7,6 +7,11 @@ description: |
   and never add a co-author trailer for Claude, Claude Code,
   or any other agent.
 user-invokable: false
+license: MIT
+metadata:
+  author: Yegor Bugayenko
+  version: "0.1.0"
+  category: SDLC
 ---
 
 Run `git status` and `git diff --staged` before composing

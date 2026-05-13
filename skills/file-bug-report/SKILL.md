@@ -12,6 +12,11 @@ description: |
   one ping per run — then stop.
 argument-hint: "[owner/repo]"
 user-invokable: false
+license: MIT
+metadata:
+  author: Yegor Bugayenko
+  version: "0.1.0"
+  category: SDLC
 ---
 
 Operate on the GitHub repository `$1`.

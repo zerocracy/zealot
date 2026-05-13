@@ -10,6 +10,11 @@ description: |
   request per run, one verdict per run — then stop.
 argument-hint: "[owner/repo] [pr-number]"
 user-invokable: false
+license: MIT
+metadata:
+  author: Yegor Bugayenko
+  version: "0.1.0"
+  category: SDLC
 ---
 
 Operate on the pull request `$1#$2`.
