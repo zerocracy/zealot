@@ -16,11 +16,6 @@ Treat the input as a single GitHub issue reference —
   current repository; refuse to run if no issue is
   given, and do not guess one from memory.
 
-Use the `gh` CLI for every read and write against
-  GitHub, so authentication, rate limits, and pagination
-  are handled by the official tool rather than by ad hoc
-  HTTP calls.
-
 Refuse to classify a pull request as if it were an
   issue; this skill labels bug reports, not change
   proposals, and the `review-pull-request` skill exists
@@ -30,12 +25,6 @@ Refuse to classify an issue that is already closed
   unless the user explicitly asked for a retro-label;
   a closed issue is out of the working backlog, and a
   late label rarely changes the outcome.
-
-Read the `README.md` and `CLAUDE.md` files at the root
-  of the repository before reading the issue; they name
-  the project's scope, its supported platforms, and the
-  conventions that decide whether a reported behavior
-  is a defect or by design.
 
 Fetch the issue body, the issue title, the existing
   labels, the author login, the assignees, the linked
@@ -180,16 +169,8 @@ Post one short follow-up comment on the issue only
   the reporter at the doc or the forum.
 
 Keep the follow-up comment to one or two sentences of
-  plain prose — no headings, no bullet lists, no
-  emojis, no banners — because the comment is a
-  pointer, not a second report.
-
-Never name Claude, Claude Code, Anthropic, an AI
-  agent, a language model, or any other automation
-  tool in the follow-up comment or in any other text
-  posted to GitHub during this run — omit every
-  signature, footer, banner, trailer, and disclosure
-  that hints the content was machine-generated.
+  plain prose, because the comment is a pointer, not a
+  second report.
 
 Stop after the labels are applied and the optional
   follow-up comment is posted: do not classify a

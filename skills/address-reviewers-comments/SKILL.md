@@ -23,22 +23,11 @@ Run `git status` first; if the working directory has
   hunks, stop immediately and do not continue, because
   this skill will commit and push during the run.
 
-Read the `README.md` and `CLAUDE.md` files at the root
-  of the repository before touching anything; they name
-  the build command, the coding conventions, and the
-  project-specific rules every reply and every fix in
-  this run must respect.
-
 Check out the pull request branch locally (for example
   with `gh pr checkout <number>`), and run `git pull`
   on that branch so the work starts from the latest
   state of the head ref and not from a stale local
   copy.
-
-Use the `gh` CLI for every read and write against
-  GitHub, so authentication, rate limits, and
-  pagination are handled by the official tool rather
-  than by ad hoc HTTP calls.
 
 Collect every comment on the pull request from three
   sources: inline review comments
@@ -148,29 +137,7 @@ Use the GitHub reply endpoints to keep each reply on
   original — and never bundle replies into a single
   generic comment at the bottom of the pull request.
 
-Keep every reply short, factual, and free of
-  apology, flattery, or hedging — no `thanks`, no
-  `good catch`, no `you are right`, no `sorry`, no
-  emoji; the reviewer needs the answer, not the
-  ceremony.
-
-Talk like a human in every commit message and every
-  reply this skill writes, and avoid excessive markup
-  and formatting — no headings, no section dividers,
-  no nested bullet lists, no tables, no collapsed
-  sections, no checkboxes, no banners — use plain
-  prose in short paragraphs and reserve fenced code
-  blocks for the rare case where quoting code is
-  essential.
-
-Never name Claude, Claude Code, Anthropic, an AI
-  agent, a language model, or any other automation
-  tool in commit messages, replies to reviewer
-  comments, or any other text posted to GitHub
-  during this run — omit every signature, footer,
-  banner, trailer, and disclosure that hints the
-  content was machine-generated, so each post reads
-  as if a human author wrote it directly.
+Keep every reply short and factual.
 
 Do not mark a thread resolved without first posting
   a reply, and do not mark a thread resolved on

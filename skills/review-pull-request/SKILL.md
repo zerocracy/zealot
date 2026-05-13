@@ -22,17 +22,6 @@ Run `git status` first; if the working directory has
   this skill checks out the pull request branch and a
   dirty tree blocks the checkout.
 
-Read the `README.md` and `CLAUDE.md` files at the root
-  of the repository before reading the diff; they name
-  the build command, the coding conventions, and the
-  project-specific rules every inline comment and the
-  final verdict in this run must respect.
-
-Use the `gh` CLI for every read and write against
-  GitHub, so authentication, rate limits, and pagination
-  are handled by the official tool rather than by ad hoc
-  HTTP calls.
-
 Refuse to review a pull request authored by the same
   account that is running this skill; a self-review is a
   conflict of interest, and the user can read their own
@@ -116,17 +105,6 @@ Use GitHub suggested-change blocks
   suggestion block hides the reasoning behind the
   patch.
 
-Keep every comment free of apology, flattery, or
-  hedging — no `thanks`, no `nice work`, no `nit:`, no
-  `IMO`, no `you might want to`, no emoji; the author
-  needs the verdict, not the ceremony.
-
-Do not overuse Markdown: no headings, no nested bullet
-  lists, no tables, no collapsed sections, no banners —
-  use plain prose in short paragraphs and reserve fenced
-  code blocks for the rare case where quoting code is
-  essential.
-
 Run the build — every test, every linter, every static
   check named in `README.md` or `CLAUDE.md` — locally
   on the checked-out branch when the project's rules
@@ -169,14 +147,6 @@ Submit the review in one call with
   endpoint, so the inline comments and the verdict
   land as a single review and not as a stream of
   separate posts.
-
-Never name Claude, Claude Code, Anthropic, an AI agent,
-  a language model, or any other automation tool in the
-  inline comments, the review-summary body, or any
-  follow-up reply during this run — omit every
-  signature, footer, banner, trailer, and disclosure
-  that hints the content was machine-generated, so each
-  post reads as if a human reviewer wrote it directly.
 
 Do not merge the pull request, do not auto-merge it,
   do not close it, do not push commits to its branch,

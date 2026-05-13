@@ -22,16 +22,6 @@ Run `git status` first; if the working directory has any
   discard them, because every change in the diff must be
   recorded in a commit before the pull request opens.
 
-Read the `README.md` and `CLAUDE.md` files at the root
-  of the repository before touching anything; they name
-  the build command, the coding conventions, and the
-  project-specific rules the pull request must respect.
-
-Use the `gh` CLI for every read and write against
-  GitHub, so authentication, rate limits, and pagination
-  are handled by the official tool rather than by ad hoc
-  HTTP calls.
-
 Identify the base branch from
   `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`
   rather than guessing `main` or `master`, because the
@@ -143,29 +133,6 @@ Keep the body compact: a few short sentences per
   paragraph, no walls of text, no exhaustive file lists,
   no restated diff, because reviewers skim the
   description and read the diff.
-
-Do not overuse Markdown: no nested headings beyond a
-  single `##` per section, no nested bullet lists, no
-  tables, no collapsed sections, no emojis, no banners —
-  at most a single short fenced code block to quote a
-  command, a stack trace, or a sample of output when the
-  quote is essential.
-
-Talk like a human writing to another human: state the
-  change directly, do not pad with pleasantries, and do
-  not open with a summary of the project itself.
-
-Never name Claude, Claude Code, Anthropic, an AI agent,
-  a language model, or any other automation tool in the
-  pull request title, the pull request body, any inline
-  comment, or any commit message that lands on the
-  branch — omit every signature, footer, banner,
-  trailer, and disclosure that hints the content was
-  machine-generated.
-
-Do not sign the body with a "Generated with" line, a
-  marketing footer, or any AI-disclosure boilerplate;
-  the pull request stands on its content.
 
 Pass the title and body to `gh pr create` via a HEREDOC
   to `--body-file -` or `--body "$(cat <<'EOF' ... EOF)"`,
