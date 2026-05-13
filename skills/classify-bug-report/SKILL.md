@@ -149,6 +149,15 @@ Never apply priority labels (`P0`, `P1`, `P2`,
   call the maintainer makes from a full backlog, not a
   triage call.
 
+Post one comment on the issue before applying the
+  labels: explain in plain prose how the bug or the
+  enhancement could be fixed — name the file, the
+  function, or the change a maintainer would touch when
+  the evidence in the thread allows it — and answer the
+  question directly when the issue is a question,
+  citing the README or the source code rather than
+  guessing.
+
 Apply the chosen labels in one call with
   `gh issue edit <number> --add-label "<label1>,<label2>,..."`
   so the change lands as a single edit, and remove
