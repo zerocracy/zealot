@@ -1,6 +1,6 @@
 ---
 name: make-one-contribution
-description: Use this skill as the daily entry point for a single contribution across a list of GitHub repositories and accounts — first scans the notification inbox for an inbound comment from another user and delegates to respond-to-comment, otherwise picks one repository from the list and one of file-bug-report, classify-bug-report, submit-pull-request, or review-pull-request based on backlog and queue signals, then delegates and stops.
+description: Use this skill as the daily entry point for a single contribution across a list of GitHub orgs and users — first scans the notification inbox for an inbound comment from another user and delegates to respond-to-comment, otherwise picks one repository owned by an account on the list and one of file-bug-report, classify-bug-report, submit-pull-request, or review-pull-request based on backlog and queue signals, then delegates and stops.
 ---
 
 Read `CONVENTIONS.md` at the root of this plugin
@@ -9,25 +9,20 @@ Read `CONVENTIONS.md` at the root of this plugin
   to the delegated sub-skill as the canonical source
   of voice, signature, tooling, and Markdown rules.
 
-Read the input as two lists named in the user's
-  prompt: a list of repositories in `<owner>/<repo>`
-  form, and a list of GitHub accounts in `<login>`
-  form; refuse to run when neither list is provided,
-  and do not invent entries from memory.
+Read the input as a single list named in the user's
+  prompt: a list of GitHub accounts in `<login>` form,
+  where each entry is either an organization or a
+  user; refuse to run when the list is empty or
+  missing, and do not invent entries from memory.
 
-Treat the account list as the set of GitHub logins
-  whose notifications, mentions, and review requests
-  this run is allowed to act on; the current login
-  must appear in the list, and the run skips any
-  notification addressed only to a login outside the
-  list.
-
-Treat the repository list as the set of repositories
-  this run is allowed to touch as a target; ignore
-  any notification, issue, or pull request whose
-  repository is not on the list, even when the
-  current login is mentioned, because the run is not
-  authorized to write outside the list.
+Treat the account list as the set of GitHub accounts
+  whose repositories this run is allowed to touch as
+  a target; enumerate the public, non-archived,
+  non-fork repositories owned by each account with
+  `gh repo list <login> --limit 1000 --no-archived
+  --source --json nameWithOwner --jq
+  '.[].nameWithOwner'` and take the union as the
+  repository set for the rest of the run.
 
 Identify the current GitHub login once with
   `gh api user --jq .login` and capture it for the
@@ -45,8 +40,8 @@ Fetch the unread notifications addressed to the
   outranks every other contribution type on this run.
 
 Filter the notification list down to entries whose
-  `repository.full_name` is on the repository list,
-  whose `reason` is one of `mention`,
+  `repository.full_name` is in the derived repository
+  set, whose `reason` is one of `mention`,
   `review_requested`, `comment`, or `author`, and
   whose `subject.type` is `Issue`, `PullRequest`, or
   `PullRequestReview`, because those are the four
@@ -68,12 +63,9 @@ For each remaining notification, fetch the source
 
 Discard a notification when the latest comment on the
   thread was authored by the current login, by the
-  bot that opened the pull request, by
+  bot that opened the pull request, or by
   `github-actions[bot]` when the body is a pure CI
-  status echo, or by an account on neither the
-  account list nor the recognized automated-reviewer
-  set (`copilot-pull-request-reviewer`,
-  `coderabbitai`, `sonarcloud`, `codecov`).
+  status echo.
 
 Discard a notification when the latest comment from
   another user has already been answered in-thread by
@@ -91,8 +83,10 @@ Choose `respond-to-comment` as the contribution type
 
 ## Step 2: pick a repository when the inbox is clean
 
-Walk the repository list in the order it was given
-  and, for each repository, fetch the same four
+Walk the derived repository set in the order the
+  accounts were given — and, within each account, in
+  the order `gh repo list` returned the repositories
+  — and, for each repository, fetch the same four
   counts the decision below depends on, because the
   repository chosen is the one with the strongest
   signal across these counts.
@@ -116,7 +110,7 @@ Fetch the open pull requests with
   size — feeds the `submit-pull-request` and
   `review-pull-request` branches.
 
-Pick a single repository from the list before picking
+Pick a single repository from the derived set before picking
   a contribution type: prefer the repository with at
   least one unlabeled open issue, then the
   repository with ten or fewer open issues, then the
@@ -199,7 +193,7 @@ Do not fall back to a different repository when the
   sub-skill reports no actionable target inside the
   chosen repository; the chosen repository was the
   decision, and the next run picks again from the
-  whole list.
+  whole derived set.
 
 Stop after the delegated sub-skill finishes: do not
   pick a second repository, do not pick a second
