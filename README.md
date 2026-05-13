@@ -8,7 +8,8 @@ Zealot is a bundle of disciplined skills for the everyday GitHub
 The single top-level entry point is `make-one-contribution`:
   it inspects the target repository, picks the one contribution type
   the repository needs most today — file a bug report, classify an
-  unlabeled issue, fix one issue, or review a pull request —
+  unlabeled issue, submit a pull request, or review a pull
+  request —
   delegates to the matching sub-skill, and stops.
 
 This plugin is meant for routines only — there is no CLI install step, no

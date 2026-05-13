@@ -6,8 +6,9 @@ description: |
   inspect the repository's open issues, its unlabeled
   issues, and its open pull requests, decide which one of
   four contribution types the repository needs most —
-  file a bug report, classify an unlabeled issue, fix one
-  issue, or review a pull request — pick a single target
+  file a bug report, classify an unlabeled issue, submit
+  a pull request, or review a pull request — pick a
+  single target
   inside that type, delegate to the matching sub-skill,
   and stop. One contribution per run, one sub-skill per
   run — then stop.
@@ -58,10 +59,10 @@ Choose `classify-bug-report` when at least one open
   issue is invisible to triage and a single label is
   the cheapest contribution available on this pass.
 
-Choose `fix-one-issue` when the open pull request queue
-  is short — five or fewer open pull requests — because
-  a short queue means a new fix will be reviewed and
-  merged rather than buried under older pull requests.
+Choose `submit-pull-request` when the open pull request
+  queue is short — five or fewer open pull requests —
+  because a short queue means a new fix will be reviewed
+  and merged rather than buried under older pull requests.
 
 Choose `review-pull-request` otherwise, because a long
   pull request queue is the strongest signal that the
@@ -77,7 +78,7 @@ Pick a single target inside the chosen contribution
   type before delegating: for `file-bug-report`, no
   target is needed because the sub-skill picks the
   defect itself; for `classify-bug-report`, pick the
-  oldest unlabeled open issue; for `fix-one-issue`,
+  oldest unlabeled open issue; for `submit-pull-request`,
   pick the oldest open issue labeled `bug` or
   `enhancement` that is unassigned and has no claimed
   work in the thread; for `review-pull-request`, pick
