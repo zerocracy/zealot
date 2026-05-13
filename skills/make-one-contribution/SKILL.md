@@ -11,11 +11,11 @@ description: |
   inside that type, delegate to the matching sub-skill,
   and stop. One contribution per run, one sub-skill per
   run — then stop.
+user-invokable: true
 ---
 
-Treat the input as a single GitHub repository in the
-  form `<owner>/<repo>`; refuse to run if no repository
-  is given, and do not invent one from memory.
+Operate on the GitHub repository `$1`; refuse to run
+  if `$1` is empty, and do not invent one from memory.
 
 Use the `gh` CLI for every read against GitHub, so
   authentication, rate limits, and pagination are

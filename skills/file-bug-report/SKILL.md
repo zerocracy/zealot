@@ -10,12 +10,11 @@ description: |
   fix, and post one short follow-up comment pinging the
   repository owner. One bug per run, one issue per run,
   one ping per run — then stop.
+argument-hint: "[owner/repo]"
+user-invokable: false
 ---
 
-Treat the input as a single GitHub repository in the
-  form `<owner>/<repo>` plus an optional description of
-  the defect; refuse to run if no repository is given,
-  and do not invent one from memory.
+Operate on the GitHub repository `$1`.
 
 Clone or pull the repository's default branch into a
   local working directory before reading any code, so the

@@ -8,13 +8,11 @@ description: |
   already defines, and apply them with `gh`. Do not
   close the issue, do not assign it, do not write a
   fix — only classify. One issue per run — then stop.
+argument-hint: "[owner/repo] [issue-number]"
+user-invokable: false
 ---
 
-Treat the input as a single GitHub issue reference —
-  the issue — supplied by the user as an URL, an
-  `owner/repo#number` triplet, or a number against the
-  current repository; refuse to run if no issue is
-  given, and do not guess one from memory.
+Operate on the GitHub issue `$1#$2`.
 
 Refuse to classify a pull request as if it were an
   issue; this skill labels bug reports, not change

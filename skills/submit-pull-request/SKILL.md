@@ -8,13 +8,15 @@ description: |
   visible effect, and a test plan grounded in what was
   actually run, and submit it with `gh pr create`. One
   pull request per run, one branch per run — then stop.
+argument-hint: "[owner/repo]"
+user-invokable: false
 ---
 
-Treat the input as a single local branch on a single
-  GitHub repository; refuse to run if the current
-  directory is not a Git working tree, if the branch is
-  the default branch (`main` or `master`), or if no
-  upstream remote is configured.
+Operate on the GitHub repository `$1` from the
+  currently checked-out branch; refuse to run if the
+  current directory is not a Git working tree, if the
+  branch is the default branch (`main` or `master`),
+  or if no upstream remote is configured.
 
 Run `git status` first; if the working directory has any
   uncommitted changes, untracked files, or staged hunks,

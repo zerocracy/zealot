@@ -10,13 +10,11 @@ description: |
   reporter on the same thread either way. One pull
   request per run, every comment answered exactly once
   — then stop.
+argument-hint: "[owner/repo] [pr-number]"
+user-invokable: false
 ---
 
-Treat the input as a single pull request reference —
-  the PR — supplied by the user as an URL, an
-  `owner/repo#number` triplet, or a number against the
-  current repository; refuse to run if no pull request
-  is given, and do not guess one from memory.
+Operate on the pull request `$1#$2`.
 
 Run `git status` first; if the working directory has
   any uncommitted changes, untracked files, or staged
