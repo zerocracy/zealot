@@ -229,8 +229,6 @@ Stop after the follow-up comment is posted: do not pick
   pull request, and do not start a fix — re-run this
   skill from the top for the next bug.
 
-If no defect survives the duplicate filter and the
-  actionability filter, report that no bug was found in
-  the current pass, name the strongest candidate and the
-  reason it was rejected, and stop without posting
-  anywhere.
+If no bug is found, just stop: do not post anywhere, do
+  not file a placeholder issue, and do not leave a
+  follow-up comment.
