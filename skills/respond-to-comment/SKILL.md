@@ -169,6 +169,11 @@ Use the GitHub reply endpoints to keep the reply on
   --body <text>` — and never bundle the reply into a
   generic comment elsewhere on the artifact.
 
+Start every reply with `@<login>` where `<login>` is
+  the GitHub login of the comment author, so the
+  reporter is notified and the thread shows who the
+  answer is directed at.
+
 Keep every reply short and factual.
 
 Ground every PUSH-BACK reply in a concrete argument:

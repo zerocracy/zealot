@@ -167,7 +167,18 @@ Pick a single target inside the chosen contribution
   has no claimed work in the thread; for
   `review-pull-request`, pick the oldest open pull
   request in the chosen repository not authored by
-  the current login.
+  the current login and not authored by a bot.
+
+Treat a pull request as bot-authored when the
+  `author.login` ends in `[bot]`, when the
+  `author.type` is `Bot`, or when the login matches a
+  known automation account such as
+  `renovate[bot]`, `dependabot[bot]`,
+  `github-actions[bot]`, `pre-commit-ci[bot]`,
+  `mergify[bot]`, or `greenkeeper[bot]`; skip every
+  such pull request when picking the target for
+  `review-pull-request` and fall through to the next
+  candidate.
 
 Delegate to the chosen sub-skill with the picked
   target as input, and let that sub-skill enforce
