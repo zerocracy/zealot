@@ -12,6 +12,15 @@ The single top-level entry point is `make-one-contribution`:
   request —
   delegates to the matching sub-skill, and stops.
 
+A second user-callable skill, `report-to-telegram`,
+  summarizes the work just finished in the current conversation
+  into one short Markdown paragraph and posts it to a Telegram
+  chat via the Telegram Bot API; it reads the bot token from
+  the `TELEGRAM_TOKEN` environment variable and the chat id
+  from `TELEGRAM_CHAT_ID`, opens the message with one emoji
+  that visualizes the outcome, and uses Markdown only for links
+  and inline fixed-width text.
+
 Two installation paths are supported.
 
 For a Claude Routine, reference the repository inside the routine prompt

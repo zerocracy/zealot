@@ -3,7 +3,7 @@
     "email": "yegor256@gmail.com",
     "name": "Yegor Bugayenko"
   },
-  "description": "Seven skills for disciplined GitHub workflows: filing bugs, triaging issues, writing commit messages, submitting pull requests, reviewing pull requests, responding to inbound comments on issues and pull requests, and orchestrating one daily contribution",
+  "description": "Eight skills for disciplined GitHub workflows: filing bugs, triaging issues, writing commit messages, submitting pull requests, reviewing pull requests, responding to inbound comments on issues and pull requests, orchestrating one daily contribution, and reporting completed work to a Telegram chat",
   "homepage": "https://github.com/yegor256/zealot",
   "keywords": [
     "skills",
