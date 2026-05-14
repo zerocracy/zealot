@@ -76,11 +76,18 @@ Post the message once with
   "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage"
   -d chat_id="$TELEGRAM_CHAT_ID"
   -d parse_mode=MarkdownV2
+  -d disable_web_page_preview=true
   --data-urlencode text@-`
   and feed the message body to that command through
   standard input, so backticks, parentheses, newlines,
   and reserved characters survive the shell intact and
   do not need to be re-escaped on the command line.
+
+Pass `disable_web_page_preview=true` on every call so
+  Telegram does not expand the artifact URL into a
+  link-preview card under the message; the report is a
+  one-paragraph summary and the preview card would add
+  noise the reader did not ask for.
 
 Read the JSON response on the first POST and verify
   that the top-level `ok` field is `true`; when it is
