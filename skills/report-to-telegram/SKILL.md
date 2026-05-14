@@ -7,18 +7,23 @@ description: |
   paragraph, open the message with one emoji that
   visualizes the result, format with plain Markdown
   (links and inline fixed-width text only), read the
-  bot token from the `TELEGRAM_TOKEN` environment
-  variable and the chat id from `TELEGRAM_CHAT_ID`, and
-  post once via the Telegram Bot API. One report per
+  bot token from the `ZEALOT_TELEGRAM_TOKEN` environment
+  variable and the chat id from `ZEALOT_TELEGRAM_CHAT_ID`,
+  and post once via the Telegram Bot API. One report per
   run — then stop.
 ---
 
-Read the bot token from the `TELEGRAM_TOKEN`
+Stop the run immediately when either
+  `ZEALOT_TELEGRAM_TOKEN` or `ZEALOT_TELEGRAM_CHAT_ID`
+  is unset or empty: do not call the Telegram Bot API,
+  do not compose a message, do not retry, and report a
+  single-line failure naming the missing variable.
+
+Read the bot token from the `ZEALOT_TELEGRAM_TOKEN`
   environment variable and the chat id from the
-  `TELEGRAM_CHAT_ID` environment variable; refuse to
-  run when either variable is unset or empty, because
-  the message cannot reach Telegram without both
-  values.
+  `ZEALOT_TELEGRAM_CHAT_ID` environment variable, and
+  use those values for every Telegram Bot API call in
+  this run.
 
 Build the report only from the work the agent
   actually performed in the current conversation — the
@@ -84,8 +89,8 @@ Keep the paragraph under one thousand characters and
 
 Post the message once with
   `curl -sS -X POST
-  "https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage"
-  -d chat_id="$TELEGRAM_CHAT_ID"
+  "https://api.telegram.org/bot$ZEALOT_TELEGRAM_TOKEN/sendMessage"
+  -d chat_id="$ZEALOT_TELEGRAM_CHAT_ID"
   -d parse_mode=MarkdownV2
   -d disable_web_page_preview=true
   --data-urlencode text@-`
@@ -115,10 +120,10 @@ Never name Claude, Claude Code, Anthropic, an AI
   contribution, not the tool that produced it.
 
 Never log, print, echo, or write the value of
-  `TELEGRAM_TOKEN` to the conversation, to a file, to
-  a shell trace, or to a debug line; the token is a
-  credential and a leaked credential lets a third
-  party impersonate the bot in every chat it has
+  `ZEALOT_TELEGRAM_TOKEN` to the conversation, to a
+  file, to a shell trace, or to a debug line; the
+  token is a credential and a leaked credential lets a
+  third party impersonate the bot in every chat it has
   joined.
 
 Stop after the single `sendMessage` call returns

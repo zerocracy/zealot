@@ -3,6 +3,19 @@ name: make-one-contribution
 description: Use this skill as the daily entry point for a single contribution across a list of GitHub orgs and users — first scans the notification inbox for an inbound comment from another user and delegates to respond-to-comment, otherwise picks one repository owned by an account on the list and one of file-bug-report, triage-issue, submit-pull-request, or review-pull-request based on backlog and queue signals, then delegates and stops.
 ---
 
+Stop the run immediately when the `ZEALOT_GITHUB_TOKEN`
+  environment variable is unset or empty: do not call
+  `gh`, do not enumerate repositories, do not delegate
+  to any sub-skill, and report a single-line failure
+  naming the missing variable.
+
+Authenticate every `gh` command-line invocation in this
+  run with the token from `ZEALOT_GITHUB_TOKEN` by
+  exporting it as `GH_TOKEN` for the process
+  (`export GH_TOKEN="$ZEALOT_GITHUB_TOKEN"`) before the
+  first `gh` call, and pass the same requirement to
+  every delegated sub-skill.
+
 Read `CONVENTIONS.md` at the root of this plugin
   before doing anything else, hold every rule in that
   file as binding for the rest of the run, and pass it
