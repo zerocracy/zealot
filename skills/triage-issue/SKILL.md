@@ -1,13 +1,15 @@
 ---
-name: classify-bug-report
+name: triage-issue
 description: |
   Use this skill to triage a single GitHub issue: read
   the report, decide whether it is a real bug, an
   enhancement request, a question, a duplicate, or
   invalid, pick labels from the labels the repository
-  already defines, and apply them with `gh`. Do not
-  close the issue, do not assign it, do not write a
-  fix — only classify. One issue per run — then stop.
+  already defines, and apply them with `gh`; close the
+  issue when the outcome is `duplicate` or `invalid`,
+  otherwise leave it open. Do not assign it, do not
+  write a fix — only classify and, when warranted,
+  close. One issue per run — then stop.
 ---
 
 Operate on the GitHub issue named in the user's prompt
@@ -146,12 +148,33 @@ Apply the chosen labels in one call with
   contradictory labels in the same call with
   `--remove-label` rather than across two writes.
 
-Do not close the issue, do not reopen it, do not
-  merge it into another issue, do not edit its title
-  or body, do not assign it to anyone, do not set a
-  milestone, and do not add it to a project board; the
-  only write action permitted by this skill is the
-  label edit.
+Close the issue with
+  `gh issue close <number> --repo <owner>/<repo>
+  --reason "not planned"` when the chosen primary
+  kind is `duplicate` or `invalid`, because such an
+  issue carries no actionable work and a closed state
+  keeps the backlog honest; leave the issue open for
+  every other primary kind.
+
+Post a closing comment before the close call that
+  states the reason in one or two sentences — for
+  `duplicate`, name the original issue number and
+  explain the overlap; for `invalid`, cite the file,
+  the documentation, or the platform constraint that
+  rules the report out — and end the comment with a
+  line inviting the reporter to open a new issue if
+  the problem persists or a similar problem appears,
+  so the close lands as an explanation rather than a
+  dismissal.
+
+Do not reopen an issue, do not merge it into another
+  issue, do not edit its title or body, do not assign
+  it to anyone, do not set a milestone, and do not add
+  it to a project board; the only write actions
+  permitted by this skill are the label edit, the
+  classification comment, the optional follow-up
+  comment, and — for `duplicate` or `invalid` — the
+  close.
 
 Post one short follow-up comment on the issue only
   when the classification calls for action by the
@@ -165,14 +188,17 @@ Keep the follow-up comment to one or two sentences of
   plain prose, because the comment is a pointer, not a
   second report.
 
-Stop after the labels are applied and the optional
-  follow-up comment is posted: do not classify a
-  second issue, do not start a fix, and re-run this
-  skill from the top for the next issue.
+Stop after the labels are applied, the optional
+  follow-up comment is posted, and — when the outcome
+  was `duplicate` or `invalid` — the issue is closed:
+  do not classify a second issue, do not start a fix,
+  and re-run this skill from the top for the next
+  issue.
 
 Report at the end of the run a short factual summary:
   the issue URL, the primary kind chosen, the scope
   and severity labels applied, the labels removed (if
-  any), and the link to the follow-up comment when
-  one was posted, so the maintainer can scan the
-  result without re-reading the whole thread.
+  any), the close state (closed or left open) with the
+  reason when closed, and the link to the follow-up
+  comment when one was posted, so the maintainer can
+  scan the result without re-reading the whole thread.

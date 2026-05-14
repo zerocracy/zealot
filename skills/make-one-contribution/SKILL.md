@@ -1,6 +1,6 @@
 ---
 name: make-one-contribution
-description: Use this skill as the daily entry point for a single contribution across a list of GitHub orgs and users — first scans the notification inbox for an inbound comment from another user and delegates to respond-to-comment, otherwise picks one repository owned by an account on the list and one of file-bug-report, classify-bug-report, submit-pull-request, or review-pull-request based on backlog and queue signals, then delegates and stops.
+description: Use this skill as the daily entry point for a single contribution across a list of GitHub orgs and users — first scans the notification inbox for an inbound comment from another user and delegates to respond-to-comment, otherwise picks one repository owned by an account on the list and one of file-bug-report, triage-issue, submit-pull-request, or review-pull-request based on backlog and queue signals, then delegates and stops.
 ---
 
 Read `CONVENTIONS.md` at the root of this plugin
@@ -96,12 +96,12 @@ Fetch the open issues with
   --limit 200 --json
   number,title,labels,assignees,createdAt`,
   and count them; the total — the backlog size —
-  feeds the `file-bug-report` and `classify-bug-report`
+  feeds the `file-bug-report` and `triage-issue`
   branches.
 
 Count the unlabeled open issues separately — those
   whose `labels` array is empty — because they are
-  the trigger for the `classify-bug-report` branch.
+  the trigger for the `triage-issue` branch.
 
 Fetch the open pull requests with
   `gh pr list --repo <owner>/<repo> --state open
@@ -122,7 +122,7 @@ Pick a single repository from the derived set before picking
 
 ## Step 3: pick the contribution type for the chosen repo
 
-Choose `classify-bug-report` when at least one open
+Choose `triage-issue` when at least one open
   issue in the chosen repository carries no labels at
   all, because an unlabeled issue is invisible to
   triage and a single label is the cheapest
@@ -159,7 +159,7 @@ Pick a single target inside the chosen contribution
   pass the artifact reference and the comment id
   selected in Step 1; for `file-bug-report`, no
   target is needed because the sub-skill picks the
-  defect itself; for `classify-bug-report`, pick the
+  defect itself; for `triage-issue`, pick the
   oldest unlabeled open issue in the chosen
   repository; for `submit-pull-request`, pick the
   oldest open issue labeled `bug` or `enhancement`
