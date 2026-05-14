@@ -40,6 +40,17 @@ Compose the message as a single paragraph of plain
   blocks, no horizontal rules — one paragraph is one
   paragraph.
 
+Write the report as a personal status update from the
+  agent to a single human supervisor: open the
+  paragraph with a direct salutation addressed to a
+  person (`Boss,` when no recipient name is configured,
+  or the configured first name when one is available),
+  phrase every clause in the first person with `I`,
+  `me`, `my`, and report what I did, what I found, and
+  what I left for the next step, so the message reads
+  as a one-to-one account from a subordinate to a boss
+  rather than an impersonal system log.
+
 Open the message with exactly one emoji picked by the
   agent to match its own reading of the outcome just
   obtained — success, failure, partial result, surprise,
