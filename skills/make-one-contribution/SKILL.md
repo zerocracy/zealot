@@ -30,6 +30,15 @@ Identify the current GitHub login once with
   comments, pull requests, or notifications by author
   or recipient depends on this value.
 
+Ignore every issue whose `labels` array contains
+  `wontfix`, `invalid`, or `duplicate` for the entire
+  run: skip it when scanning notifications in Step 1,
+  exclude it from the open-issue and unlabeled-issue
+  counts in Step 2, never pick it as the target in
+  Step 4, and do not comment, react, push a commit,
+  or open a pull request against it — walk past such
+  an issue as if it did not exist.
+
 ## Step 1: scan the notification inbox first
 
 Fetch the unread notifications addressed to the
