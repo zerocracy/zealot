@@ -163,11 +163,20 @@ Pick a single target inside the chosen contribution
   oldest unlabeled open issue in the chosen
   repository; for `submit-pull-request`, pick the
   oldest open issue labeled `bug` or `enhancement`
-  in the chosen repository that is unassigned and
-  has no claimed work in the thread; for
-  `review-pull-request`, pick the oldest open pull
-  request in the chosen repository not authored by
-  the current login and not authored by a bot.
+  in the chosen repository that is unassigned, not
+  authored by the current login, and has no claimed
+  work in the thread; for `review-pull-request`,
+  pick the oldest open pull request in the chosen
+  repository not authored by the current login and
+  not authored by a bot.
+
+Skip every open issue authored by the current login
+  when picking the target for `submit-pull-request`
+  and fall through to the next candidate, because a
+  bug reporter must not be the person who solves the
+  bug — the fix needs a second pair of eyes, and a
+  self-fixed report defeats the review value of
+  filing it in the first place.
 
 Treat a pull request as bot-authored when the
   `author.login` ends in `[bot]`, when the
