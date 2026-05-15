@@ -171,10 +171,14 @@ Pick a single target inside the chosen contribution
   defect itself; for `triage-issue`, pick the
   oldest unlabeled open issue in the chosen
   repository; for `submit-pull-request`, pick the
+  oldest open issue labeled `help wanted` in the
+  chosen repository that is unassigned, not
+  authored by the current login, and has no
+  claimed work in the thread, and fall back to the
   oldest open issue labeled `bug` or `enhancement`
-  in the chosen repository that is unassigned, not
-  authored by the current login, and has no claimed
-  work in the thread; for `review-pull-request`,
+  under the same conditions only when no
+  `help wanted` candidate remains; for
+  `review-pull-request`,
   pick the oldest open pull request in the chosen
   repository not authored by the current login and
   not authored by a bot.
