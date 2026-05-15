@@ -125,22 +125,35 @@ Never apply priority labels (`P0`, `P1`, `P2`,
   call the maintainer makes from a full backlog, not a
   triage call.
 
-Post one comment on the issue before applying the
-  labels that contributes either criticism or support
-  to the report — never both, never neither — and keep
-  the tone neutral, because the job of the comment is
-  to help a future implementor decide how to resolve
-  the issue and to surface the risks they must weigh,
-  not to praise the reporter or to dismiss the report.
+Post a comment on the issue before applying the labels
+  only when the comment adds value the thread does not
+  already carry — a concrete piece of criticism, a
+  concrete piece of support, a missing piece of
+  evidence, or a risk a future implementor would
+  otherwise miss — and keep the tone neutral, because
+  the job of the comment is to help the next reader
+  decide how to resolve the issue, not to praise the
+  reporter or to dismiss the report.
 
-Ground the comment in evidence from the thread and the
-  source code: name the file, the function, the test,
-  or the change a maintainer would touch; cite the
-  README, the contract, or the code when the issue is
-  a question; and call out the risks — broken tests,
-  behavior changes, backward incompatibility, security
-  exposure, performance regressions — that the
-  resolution would carry.
+Stay silent when there is nothing important to add:
+  silence is a valid outcome of this skill, and a run
+  that applies labels without a comment is a complete
+  run when the thread already carries the relevant
+  evidence and a fresh comment would only restate it.
+
+Never post a comment that summarizes the issue back to
+  the reporter, thanks the reporter, restates the
+  chosen label, or acknowledges receipt; such a comment
+  adds no value and clutters the thread.
+
+Ground the comment, when one is posted, in evidence
+  from the thread and the source code: name the file,
+  the function, the test, or the change a maintainer
+  would touch; cite the README, the contract, or the
+  code when the issue is a question; and call out the
+  risks — broken tests, behavior changes, backward
+  incompatibility, security exposure, performance
+  regressions — that the resolution would carry.
 
 Apply the chosen labels in one call with
   `gh issue edit <number> --add-label "<label1>,<label2>,..."`
