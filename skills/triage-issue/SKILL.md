@@ -141,10 +141,40 @@ Stay silent when there is nothing important to add:
   run when the thread already carries the relevant
   evidence and a fresh comment would only restate it.
 
+React with a GitHub emoji to a comment in the thread —
+  or to the issue body itself — when the agent would
+  otherwise want to praise or push back on it: pick
+  `+1` for a position the agent agrees with, `-1` for
+  one the agent disagrees with, `heart` for a
+  contribution that supplies evidence the maintainer
+  should not miss, `hooray` for a correct resolution
+  the reporter has already proposed, and `confused`
+  for a statement that contradicts the thread or the
+  source code; post the reaction with
+  `gh api -X POST /repos/<owner>/<repo>/issues/comments/<id>/reactions -f content=<reaction>`
+  for a comment, or
+  `gh api -X POST /repos/<owner>/<repo>/issues/<number>/reactions -f content=<reaction>`
+  for the issue body, because a single emoji carries
+  the signal a redundant prose reply would carry
+  without cluttering the thread.
+
+React on every comment the agent has a stance on, not
+  only the ones that trigger a prose comment; a
+  reaction is the agent's default channel for like and
+  dislike, and skipping it leaves the maintainer blind
+  to the agent's read of the thread.
+
+Skip the reaction on text that carries neither
+  agreement nor disagreement — a neutral status update,
+  a bot post, a quote of the title, a routine
+  cross-link — because a reaction without a reason
+  adds noise.
+
 Never post a comment that summarizes the issue back to
   the reporter, thanks the reporter, restates the
   chosen label, or acknowledges receipt; such a comment
-  adds no value and clutters the thread.
+  adds no value and clutters the thread, and a `+1`
+  reaction covers the same intent at lower cost.
 
 Ground the comment, when one is posted, in evidence
   from the thread and the source code: name the file,
