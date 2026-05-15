@@ -95,6 +95,17 @@ Treat repository-level health issues as valid bug
   published coverage below eighty percent; or typos and
   grammar mistakes in code, comments, or documentation.
 
+Treat a build that is not strict enough as a valid bug
+  too: compiler warnings not promoted to errors, lint
+  rules disabled or set to warn rather than fail, only a
+  subset of available checkers enabled in the linter or
+  static analyzer, type checkers running in permissive
+  mode, coverage thresholds absent or set below a
+  reasonable bar, or CI steps that swallow non-zero exit
+  codes — file it with a pointer to the offending
+  configuration file and a one-sentence sketch of the
+  stricter setting.
+
 Treat design inconsistencies as another class of bug —
   lack of modularity, inadequate error handling,
   inconsistent naming conventions, inadequate data
@@ -112,9 +123,24 @@ Treat design inconsistencies as another class of bug —
   lines, and only when it is a demonstrable defect
   rather than a matter of taste.
 
+Rank the candidates by severity before picking one: a
+  crash path, a data-loss path, a security hole, a
+  silent wrong result on a common input, or a broken
+  core contract outranks a missing checker, a lax build
+  setting, a doc gap, a stylistic inconsistency, or a
+  typo — file the most severe finding first.
+
+Dig until a severe bug surfaces rather than stopping at
+  the first surface-level finding: read the module's
+  error paths, concurrency, boundary conditions, and
+  assumptions about inputs; follow the data through
+  several layers; and treat shallow reporting as a
+  failure of this skill, not a shortcut.
+
 Pick the single most concrete and verifiable finding
-  from the candidates, and drop the rest — this skill
-  files one bug per run, not a shortlist.
+  from the highest-severity candidates, and drop the
+  rest — this skill files one bug per run, not a
+  shortlist.
 
 Prefer a bug grounded in a specific file and line range
   over a vague architectural complaint, because a
