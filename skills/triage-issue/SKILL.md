@@ -53,6 +53,25 @@ Map the issue to exactly one primary kind from the
   kinds at once, because a single issue has a single
   nature.
 
+Skip the primary-kind label entirely when the report
+  does not clearly fit one kind in the vocabulary, when
+  the evidence is too thin to support a confident
+  choice, or when a firm classification needs the
+  project architect's call; an unlabelled issue is a
+  valid outcome of this skill, and an honest skip is
+  cheaper than a label the maintainer must later
+  reverse.
+
+Post a short comment asking the project architect for
+  a call when the skip is triggered by the need for a
+  firm classification from above — name the question
+  the architect needs to answer (`bug or enhancement?`,
+  `in scope?`, `is the platform supported?`) in one
+  sentence, and `@`-mention the architect by the login
+  the repository names in `CODEOWNERS`, the README, or
+  a `MAINTAINERS` file — so the issue is not stalled
+  while waiting for a label.
+
 Choose `bug` when the report names a behavior that
   contradicts the documented contract, the README, the
   `CLAUDE.md` rules, or a test that the code should
@@ -87,6 +106,16 @@ Choose `invalid` when the report describes behavior
   misreading of the documentation; an invalid label
   is a firm answer, not a guess, and it requires the
   evidence to back it.
+
+Close the issue with
+  `gh issue close <number> --reason "not planned"` and
+  apply no primary label when the report is obvious
+  spam — promotional content, an off-topic
+  advertisement, a malformed paste with no actionable
+  body, or machine-generated noise — and post one short
+  comment that names the symptom (the promo link, the
+  off-topic subject, the missing body) before the close
+  call, without an invitation to re-open the thread.
 
 Add scope labels (`docs`, `tests`, `build`, `ci`,
   `performance`, `security`, `ui`, `api`, ...) on top
