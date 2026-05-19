@@ -1,6 +1,6 @@
 # Zealot
 
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/yegor256/zealot/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/zealot/blob/master/LICENSE.txt)
 
 Zealot is a bundle of disciplined skills for the everyday GitHub
   workflow, intended to run inside [Claude Routines].
@@ -21,7 +21,7 @@ For a Claude Routine, reference the repository inside the routine prompt
 
 ```text
 Use this OAuth GitHub token: ghp_JI...tU.
-Use this GitHub repository to learn new skills: yegor256/zealot.
+Use this GitHub repository to learn new skills: zerocracy/zealot.
 Use this GitHub repository as the target: yegor256/foo.
 Use the make-one-contribution skill to make one contribution.
 ```
@@ -29,7 +29,7 @@ Use the make-one-contribution skill to make one contribution.
 For Claude Code on a developer machine, install through the marketplace:
 
 ```text
-/plugin marketplace add yegor256/zealot
+/plugin marketplace add zerocracy/zealot
 /plugin install zealot@zealot
 ```
 

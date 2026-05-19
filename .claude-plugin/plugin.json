@@ -4,7 +4,7 @@
     "name": "Yegor Bugayenko"
   },
   "description": "Seven skills for disciplined GitHub workflows: filing bugs, triaging issues, writing commit messages, submitting pull requests, reviewing pull requests, responding to inbound comments on issues and pull requests, and orchestrating one daily contribution",
-  "homepage": "https://github.com/yegor256/zealot",
+  "homepage": "https://github.com/zerocracy/zealot",
   "keywords": [
     "skills",
     "github",
@@ -16,6 +16,6 @@
   ],
   "license": "MIT",
   "name": "zealot",
-  "repository": "https://github.com/yegor256/zealot",
+  "repository": "https://github.com/zerocracy/zealot",
   "version": "0.1.0"
 }
