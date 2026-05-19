@@ -54,8 +54,17 @@ Use the `gh` CLI for every read against GitHub and for
 
 ## Run boundaries
 
-One target per run, one artifact per run; after the
-  contract of the active skill is complete, stop the run
-  and do not start a second contribution, a second issue,
-  a second pull request, a second review, or a second
-  classification on the same pass.
+Each leaf sub-skill — `file-bug-report`, `triage-issue`,
+  `submit-pull-request`, `review-pull-request`,
+  `respond-to-comment` — commits to one target and one
+  artifact per run, stops the moment its contract is
+  complete, and does not start a second contribution, a
+  second issue, a second pull request, a second review,
+  or a second classification on the same run.
+
+Only the orchestrator skill `make-one-contribution`
+  chains several sub-skill runs on the same pass: it
+  walks the preliminary phases (comments, triage, review,
+  bug report) first and ends on one submitted pull
+  request, treating each sub-skill invocation as a self-
+  contained leaf run.
