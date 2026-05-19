@@ -71,8 +71,8 @@ Operate on the chosen repository for every phase of
 
 Fetch the unread notifications addressed to the
   current login with
-  `gh api notifications --paginate
-  -f participating=true -f all=false`, and filter
+  `gh api 'notifications?participating=true&all=false'
+  --paginate`, and filter
   the list down to entries whose
   `repository.full_name` matches the chosen
   repository, whose `reason` is one of `mention`,
