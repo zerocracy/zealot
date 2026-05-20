@@ -19,6 +19,19 @@ Refuse to review a pull request that is already merged
   pull request, and a post-merge comment cannot block a
   bad change.
 
+Refuse to review a pull request whose `mergeable` field
+  reads `CONFLICTING` in
+  `gh pr view <number> --json mergeable,mergeStateStatus`;
+  the diff is unstable until the author resolves the
+  conflict, and inline comments anchored to moving lines
+  will land on the wrong code.
+
+Refuse to review a pull request that already carries at
+  least one submitted review from another reviewer in
+  `gh api repos/<owner>/<repo>/pulls/<number>/reviews`;
+  a second review on the same diff duplicates feedback
+  and crowds the thread.
+
 Check out the pull request branch locally with
   `gh pr checkout <number>` so the diff can be read in
   context, the build can be run, and inline comments can
