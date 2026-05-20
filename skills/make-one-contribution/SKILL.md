@@ -158,12 +158,14 @@ Fetch the open pull requests with
   current head commit.
 
 Treat a pull request as bot-authored when the
-  `author.login` ends in `[bot]`, when the
-  `author.type` is `Bot`, or when the login matches
-  a known automation account such as `renovate[bot]`,
-  `dependabot[bot]`, `github-actions[bot]`,
-  `pre-commit-ci[bot]`, `mergify[bot]`, or
-  `greenkeeper[bot]`.
+  `author.is_bot` field returned by `gh pr list --json
+  author` is `true`, when the `author.login` ends in
+  `[bot]` or starts with `app/`, when the `author.type`
+  field is `Bot` on a direct REST API call, or when the
+  login matches a known automation account such as
+  `renovate[bot]`, `dependabot[bot]`,
+  `github-actions[bot]`, `pre-commit-ci[bot]`,
+  `mergify[bot]`, or `greenkeeper[bot]`.
 
 Delegate to `review-pull-request` once with the
   oldest reviewable pull request as input — passed
