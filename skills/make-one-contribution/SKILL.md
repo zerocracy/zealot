@@ -125,7 +125,8 @@ Advance to Phase 2 when no comment survives the
 Fetch the open issues with
   `gh issue list --repo <owner>/<repo> --state open
   --limit 200 --json
-  number,title,labels,assignees,createdAt`, and
+  number,title,labels,assignees,createdAt --jq
+  'sort_by(.createdAt)'`, and
   select every issue whose `labels` array is empty,
   because an unlabeled issue is invisible to triage
   and a single label is the cheapest contribution
@@ -149,7 +150,8 @@ Advance to Phase 3 when no unlabeled issue remains
 Fetch the open pull requests with
   `gh pr list --repo <owner>/<repo> --state open
   --limit 200 --json
-  number,title,author,reviews,headRefOid,createdAt`,
+  number,title,author,reviews,headRefOid,createdAt
+  --jq 'sort_by(.createdAt)'`,
   and select every pull request not authored by the
   current login, not authored by a bot, and not
   already reviewed by the current login on its
