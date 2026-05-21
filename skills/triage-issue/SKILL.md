@@ -24,7 +24,7 @@ Refuse to classify an issue that is already closed
 Fetch the issue body, the issue title, the existing
   labels, the author login, the assignees, the linked
   pull requests, and every comment on the thread with
-  `gh issue view <number> --json` and
+  `gh issue view <number> --repo <owner>/<repo> --json` and
   `gh api repos/<owner>/<repo>/issues/<number>/comments`,
   so the classification is grounded in the full thread
   and not in the title alone.
@@ -108,8 +108,9 @@ Choose `invalid` when the report describes behavior
   evidence to back it.
 
 Close the issue with
-  `gh issue close <number> --reason "not planned"` and
-  apply no primary label when the report is obvious
+  `gh issue close <number> --repo <owner>/<repo>
+  --reason "not planned"` and apply no primary label
+  when the report is obvious
   spam — promotional content, an off-topic
   advertisement, a malformed paste with no actionable
   body, or machine-generated noise — and post one short
@@ -215,10 +216,11 @@ Ground the comment, when one is posted, in evidence
   regressions — that the resolution would carry.
 
 Apply the chosen labels in one call with
-  `gh issue edit <number> --add-label "<label1>,<label2>,..."`
-  so the change lands as a single edit, and remove
-  contradictory labels in the same call with
-  `--remove-label` rather than across two writes.
+  `gh issue edit <number> --repo <owner>/<repo>
+  --add-label "<label1>,<label2>,..."` so the change
+  lands as a single edit, and remove contradictory
+  labels in the same call with `--remove-label` rather
+  than across two writes.
 
 Close the issue with
   `gh issue close <number> --repo <owner>/<repo>
