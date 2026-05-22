@@ -14,6 +14,14 @@ Operate on the pull request named in the user's prompt
   as `<owner>/<repo>#<number>`; refuse to run when no
   target is named.
 
+Clone the target repository into a local working
+  directory before any `gh pr` call — `gh repo clone
+  <owner>/<repo>` and `cd` into the clone, or
+  `git pull` inside an existing clone — so
+  `gh pr checkout` has a working tree to land the head
+  ref into and every other `gh pr` call runs against
+  the latest committed state.
+
 Refuse to review a pull request that is already merged
   or closed; this skill leaves a verdict on an open
   pull request, and a post-merge comment cannot block a
@@ -21,7 +29,7 @@ Refuse to review a pull request that is already merged
 
 Refuse to review a pull request whose `mergeable` field
   reads `CONFLICTING` in
-  `gh pr view <number> --json mergeable,mergeStateStatus`;
+  `gh pr view <number> --repo <owner>/<repo> --json mergeable,mergeStateStatus`;
   the diff is unstable until the author resolves the
   conflict, and inline comments anchored to moving lines
   will land on the wrong code.
@@ -33,17 +41,19 @@ Refuse to review a pull request that already carries at
   and crowds the thread.
 
 Check out the pull request branch locally with
-  `gh pr checkout <number>` so the diff can be read in
-  context, the build can be run, and inline comments can
-  point to the right file and line.
+  `gh pr checkout <number> --repo <owner>/<repo>` so the
+  diff can be read in context, the build can be run, and
+  inline comments can point to the right file and line.
 
 Fetch the metadata of the pull request — title, body,
   base branch, head branch, author, linked issues,
-  reviewers, labels — with `gh pr view <number> --json`,
+  reviewers, labels — with
+  `gh pr view <number> --repo <owner>/<repo> --json`,
   so the review is grounded in the stated intent and not
   in a guess from the diff alone.
 
-Read the full diff with `gh pr diff <number>` once to
+Read the full diff with
+  `gh pr diff <number> --repo <owner>/<repo>` once to
   build a mental map of the change, then re-read each
   changed file in full from the working tree, because a
   diff hides the surrounding context that decides
@@ -57,10 +67,11 @@ Collect the existing review comments and review-summary
   so the new review does not duplicate feedback already
   posted by another reviewer.
 
-Check the current CI status with `gh pr checks <number>`
-  before judging the code; a red CI on a pull request
-  often points to the same defect the diff hides, and
-  the review must take it into account.
+Check the current CI status with
+  `gh pr checks <number> --repo <owner>/<repo>` before
+  judging the code; a red CI on a pull request often
+  points to the same defect the diff hides, and the
+  review must take it into account.
 
 Judge each hunk against four questions in order: does
   it match the stated intent in the title and body, does
@@ -141,7 +152,8 @@ Compose the review-summary body as one short paragraph
   is noise.
 
 Submit the review in one call with
-  `gh pr review <number> --approve|--request-changes|--comment --body-file -`
+  `gh pr review <number> --repo <owner>/<repo>
+  --approve|--request-changes|--comment --body-file -`
   or the equivalent
   `gh api -X POST repos/<owner>/<repo>/pulls/<number>/reviews`
   endpoint, so the inline comments and the verdict
