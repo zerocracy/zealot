@@ -33,16 +33,16 @@ Resolve every rebase conflict by hand, re-run the build
   `git rebase --skip` or `-X ours`/`-X theirs` shortcuts
   that drop work without review.
 
+Run the full build — every test, every linter, every
+  static check named in `README.md` or `CLAUDE.md` —
+  before opening the pull request, and stabilize it; a
+  red local build is not ready for review.
+
 Push the branch with `git push -u origin <branch>` (or
   `git push --force-with-lease` after a rebase) and
   confirm the push succeeded before invoking
   `gh pr create`, because a pull request without a
   pushed head is a stub.
-
-Run the full build — every test, every linter, every
-  static check named in `README.md` or `CLAUDE.md` —
-  before opening the pull request, and stabilize it; a
-  red local build is not ready for review.
 
 Compose the pull request title as a short, declarative
   sentence in the imperative mood, lowercase except for
