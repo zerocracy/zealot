@@ -12,10 +12,12 @@ description: |
 
 Operate on the GitHub repository named in the user's
   prompt as the target, from the feature branch the
-  master skill prepared in the local working tree;
-  trust that the working tree exists, the branch is not
-  the default branch, and the commits to publish are
-  already in place.
+  caller prepared in the local working tree under the
+  Phase 5 working-tree-preparation step of
+  `make-one-contribution` (clone, branch off the
+  default, implement, commit); trust that the working
+  tree exists, the branch is not the default branch,
+  and the commits to publish are already in place.
 
 Identify the base branch from
   `gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`

@@ -215,12 +215,26 @@ Skip every open issue authored by the current login
   self-fixed report defeats the review value of
   filing it in the first place.
 
+Prepare the working tree before delegating to
+  `submit-pull-request`: clone the chosen repository
+  with `gh repo clone <owner>/<repo>` (or `git pull`
+  inside an existing clone), check out a feature
+  branch off the default branch with `git checkout
+  -b <branch> origin/<default>` using a branch name
+  that names the picked target (for example
+  `<number>-<slug>`), implement the smallest fix
+  that resolves the picked issue end to end, and
+  commit the change with a message that follows
+  `make-git-commit`, because `submit-pull-request`
+  trusts the working tree, the branch, and the
+  commits to be in place before it runs.
+
 Delegate to `submit-pull-request` once with the
   picked target as input — passed as the artifact
   reference `<owner>/<repo>#<number>` together with
-  the repository slug — and let the sub-skill
-  enforce its own build, rebase, push, and CI
-  contract.
+  the repository slug and the prepared feature
+  branch — and let the sub-skill enforce its own
+  build, rebase, push, and CI contract.
 
 Stop the run after `submit-pull-request` finishes,
   whether the sub-skill submitted a pull request or
