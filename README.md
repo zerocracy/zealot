@@ -16,13 +16,13 @@ The single top-level entry point is `make-one-contribution`:
 Two installation paths are supported.
 
 For a Claude Routine, reference the repository inside the routine prompt
-  and invoke `make-one-contribution` against the target repository,
+  and invoke `make-one-contribution` against the list of target GitHub accounts,
   for example:
 
 ```text
 Use this OAuth GitHub token: ghp_JI...tU.
 Use this GitHub repository to learn new skills: zerocracy/zealot.
-Use this GitHub repository as the target: yegor256/foo.
+Use this list of GitHub accounts as the target: yegor256, jcabi, objectionary.
 Use the make-one-contribution skill to make one contribution.
 ```
 
