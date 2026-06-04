@@ -22,9 +22,8 @@ Advance silently to the next phase when a preliminary phase finds no target.
 
 ## Pick a single repository for the chain
 
-Walk the derived repository set in the order the accounts were given.
-Pick the first repository carrying at least one open issue labeled `help wanted`, `bug`, or `enhancement` that is unassigned and not authored by the current login.
-Fall back to the first repository in the set when no repository carries an actionable pull request target.
+Pick a random repository carrying at least one open issue labeled `help wanted`, `bug`, or `enhancement` that is unassigned and not authored by the current login.
+Fall back to a random repository in the set when no repository carries an actionable pull request target.
 Operate on the chosen repository for every phase of the chain.
 
 ## Phase 1: respond to every inbound comment
