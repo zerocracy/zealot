@@ -10,6 +10,7 @@ Target the GitHub issue the user named as `<owner>/<repo>#<number>`.
 Refuse to classify an issue that is already closed unless the user asked for a retro-label.
 Fetch the issue body, title, labels, author, assignees, linked pull requests, and every comment.
 Stop when the thread already carries a comment from the same account running this skill.
+Stop when the issue author is the same account running this skill.
 Fetch the repository's existing label vocabulary and treat it as the only vocabulary allowed.
 Do not invent new labels, rename existing ones, or create missing ones.
 Ask the user to create a missing label instead.
