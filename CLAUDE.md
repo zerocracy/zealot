@@ -2,7 +2,7 @@
 
 Write one sentence per line.
 Keep each sentence short and concise.
-Do not chain clauses with semicolons, colons, or em dashes.
+Separate clauses with periods rather than semicolons, colons, or em dashes.
 Name the action, the target, and the condition.
 Write rules as direct orders, not opinions or suggestions.
 Strip emotions and rhetorical flourish.
