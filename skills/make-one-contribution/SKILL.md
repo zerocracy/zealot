@@ -14,6 +14,7 @@ Read the input as a single list of GitHub accounts in `<login>` form.
 Refuse to run when the list is empty or missing.
 Do not invent entries from memory.
 Enumerate the public, non-archived, non-fork repositories owned by each account, and take the union as the repository set for the rest of the run.
+Skip every private repository the OAuth token can see, even when the token grants the running login read access.
 Identify the current GitHub login once and capture it for the run.
 Ignore every issue whose `labels` array contains `wontfix`, `invalid`, or `duplicate` for the entire run.
 Never comment, react, push a commit, or open a pull request against an ignored issue.
