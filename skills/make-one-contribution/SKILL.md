@@ -51,7 +51,7 @@ Advance to Phase 3 when no unlabeled issue remains.
 ## Phase 3: review every open pull request
 
 Fetch the open pull requests sorted by creation date.
-Select every pull request not authored by the current login, not authored by a bot, and not already reviewed by the current login on its current head commit.
+Select every pull request not authored by the current login, not authored by a bot, not already reviewed by the current login on its current head commit, not in a conflicting merge state, and not already reviewed by another login.
 Treat a pull request as bot-authored when `author.is_bot` is `true`, the login ends in `[bot]` or starts with `app/`, the `author.type` is `Bot`, or the login matches a known automation account like `renovate[bot]`, `dependabot[bot]`, `github-actions[bot]`, `pre-commit-ci[bot]`, `mergify[bot]`, or `greenkeeper[bot]`.
 Delegate to `review-pull-request` once with the oldest reviewable pull request.
 Wait for the sub-skill to finish, re-fetch the pull request list, and delegate again for the next oldest reviewable pull request.
