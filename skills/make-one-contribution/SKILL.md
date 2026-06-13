@@ -42,7 +42,7 @@ Advance to Phase 2 when no comment survives the filters.
 ## Phase 2: triage every unlabeled issue
 
 Fetch the open issues sorted by creation date.
-Select every issue whose `labels` array is empty.
+Select every issue whose `labels` array is empty, whose author is not the current login, and whose comment thread does not already carry a comment authored by the current login.
 Delegate to `triage-issue` once with the oldest unlabeled issue.
 Wait for the sub-skill to finish, re-fetch the open issue list, and delegate again for the next oldest unlabeled issue.
 Repeat until no unlabeled issue remains.
