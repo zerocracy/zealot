@@ -56,11 +56,12 @@ Use the `gh` CLI for every read against GitHub and for
 
 Each leaf sub-skill — `file-bug-report`, `triage-issue`,
   `submit-pull-request`, `review-pull-request`,
-  `respond-to-comment` — commits to one target and one
-  artifact per run, stops the moment its contract is
-  complete, and does not start a second contribution, a
-  second issue, a second pull request, a second review,
-  or a second classification on the same run.
+  `respond-to-comment`, `make-git-commit` — commits to one
+  target and one artifact per run, stops the moment its
+  contract is complete, and does not start a second
+  contribution, a second issue, a second pull request, a
+  second review, or a second classification on the same
+  run.
 
 Only the orchestrator skill `make-one-contribution`
   chains several sub-skill runs on the same pass: it

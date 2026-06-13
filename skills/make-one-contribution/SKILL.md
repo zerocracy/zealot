@@ -74,7 +74,7 @@ Prepare the working tree before delegating to `submit-pull-request`.
 Clone the chosen repository or pull inside an existing clone.
 Check out a feature branch off the default branch named after the picked target.
 Implement the smallest fix that resolves the picked issue end to end.
-Commit the change with a message that follows `make-git-commit`.
+Delegate to `make-git-commit` to commit the staged change.
 Delegate to `submit-pull-request` once with the picked target as `<owner>/<repo>#<number>` and the prepared feature branch.
 Stop the run after `submit-pull-request` finishes.
 Re-run this skill from the top for the next pass.
