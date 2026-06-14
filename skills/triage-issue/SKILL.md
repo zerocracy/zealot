@@ -45,7 +45,7 @@ Ground every prose comment in evidence from the thread and the source code.
 Name the file, function, test, or change a maintainer would touch.
 Cite the README, the contract, or the code when the issue is a question.
 Call out the risks the resolution would carry, like broken tests, behavior changes, backward incompatibility, security exposure, or performance regressions.
-Pass `--repo <owner>/<repo>` to every `gh issue view`, `gh issue edit`, and `gh issue close` call.
+Pass `--repo <owner>/<repo>` to every `gh issue view`, `gh issue edit`, `gh issue close`, and `gh issue comment` call.
 Apply the chosen labels in one call so the change lands as a single edit.
 Remove contradictory labels in the same call rather than across two writes.
 Close the issue with reason `not planned` when the primary kind is `duplicate` or `invalid`.
