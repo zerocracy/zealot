@@ -67,7 +67,7 @@ Advance to Phase 5 after the sub-skill finishes.
 
 ## Phase 5: submit one pull request
 
-Pick the oldest open issue labeled `help wanted` that is unassigned, not authored by the current login, and has no claimed work in the thread.
+Pick the oldest open issue labeled `help wanted` that is unassigned, not authored by the current login, has no claimed work in the thread, and has no open linked pull request authored by another login.
 Fall back to the oldest open issue labeled `bug` or `enhancement` under the same conditions when no `help wanted` candidate remains.
 Skip every open issue authored by the current login when picking the pull request target.
 Prepare the working tree before delegating to `submit-pull-request`.
