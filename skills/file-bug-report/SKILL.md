@@ -1,42 +1,108 @@
 ---
 name: file-bug-report
 description: |
-  Use this skill to file a single bug as a new GitHub
-  issue against a specific repository.
+  Use this skill when the user wants to file a single bug as a
+  new GitHub issue against a specific repository.
 ---
 
-Target the GitHub repository the user named.
-Clone or pull the default branch before reading any code.
-Verify the symptom against the source code when the user named a defect.
-Walk the source tree breadth-first when the user did not name a defect.
-Build a mental map of the main components by following imports from the entry points named in the README.
-Do not run the build, tests, linters, or static analysis.
+## Target
+
+Target GitHub repository user named.
+Clone or pull default branch before reading any code.
+
+## Verification
+
+Verify symptom against source code when user named defect.
+Walk source tree breadth-first when user did not name defect.
+Build mental map of main components.
+Follow imports from entry points named in README.
+
+## Restraint
+
+Do not run build, tests, linters, or static analysis.
 Do not modify files, create branches, or open pull requests.
-Check the open issues for a duplicate before filing.
-Discard the candidate when it matches an already-open issue.
-Check the closed issues for the same symptom.
-Look for a logical flaw, an inconsistency, or a defect when picking a bug from scratch.
-Treat a missing useful feature as a valid bug, with a concrete pointer to the file or module where the new code would belong.
-Treat repository-level health issues as valid bugs, like broken CI, missing or contradictory architecture docs, missing or insufficient linters and analyzers, noisy CI output, outdated dependencies, garbage files, non-standard layout, missing or low test coverage, or typos in code or docs.
-Treat a build that is not strict enough as a valid bug, like warnings not promoted to errors, lint rules set to warn, partial checker enablement, permissive type checking, absent coverage thresholds, or CI steps swallowing non-zero exit codes.
-Treat design inconsistencies as valid bugs only when the symptom can be tied to specific files, directories, or lines.
+
+## Duplicates
+
+Check open issues for duplicate before filing.
+Discard candidate when it matches already-open issue.
+Check closed issues for same symptom.
+
+## Selection
+
+Look for logical flaw, inconsistency, or defect when picking bug.
+Pick bug from scratch.
+Treat missing useful feature as valid bug.
+Give concrete pointer to file or module where new code belongs.
+
+## Health
+
+Treat repository-level health issues as valid bugs.
+Count broken CI, missing or contradictory architecture docs.
+Count missing or insufficient linters and analyzers.
+Count noisy CI output, outdated dependencies, garbage files.
+Count non-standard layout, missing or low test coverage.
+Count typos in code or docs.
+
+## Strictness
+
+Treat build that is not strict enough as valid bug.
+Count warnings not promoted to errors.
+Count lint rules set to warn, partial checker enablement.
+Count permissive type checking, absent coverage thresholds.
+Count CI steps swallowing non-zero exit codes.
+
+## Design
+
+Treat design inconsistencies as valid bugs only when grounded.
+Tie symptom to specific files, directories, or lines.
+
+## Ranking
+
 Rank candidates by severity before picking one.
-File the most severe finding first.
-Dig until a severe bug surfaces rather than stopping at the first surface-level finding.
-Pick the single most concrete and verifiable finding from the highest-severity candidates.
-Prefer a bug grounded in a specific file and line range over a vague architectural complaint.
+File most severe finding first.
+Dig until severe bug surfaces.
+Do not stop at first surface-level finding.
+Pick single most concrete and verifiable finding.
+Pick from highest-severity candidates.
+
+## Filtering
+
+Prefer bug grounded in specific file and line range.
+Prefer it over vague architectural complaint.
 Discard findings that are matters of taste or stylistic preference.
-Discard findings that depend on guessing the runtime behavior or on assumptions the source does not justify.
-Use a short, declarative title naming the symptom and the location, not a vague phrase like `Bug in parser`.
-Write the body as a few short paragraphs covering the bug, why it is wrong, and a proposed fix.
-Keep the body compact.
-Include a file path and an approximate line number for the offending code.
-Suggest a concrete fix in one or two sentences.
+Discard findings that depend on guessing runtime behavior.
+Discard findings that rest on assumptions source does not justify.
+
+## Title
+
+Use short, declarative title naming symptom and location.
+Do not use vague phrase like `Bug in parser`.
+
+## Body
+
+Write body as few short paragraphs.
+Cover bug, why it is wrong, and proposed fix.
+Keep body compact.
+Include file path and approximate line number for offending code.
+Suggest concrete fix in one or two sentences.
+
+## Limits
+
 Do not propose refactors, rewrites, or sweeping redesigns.
-Do not attach patches, diffs, or pull requests to the issue.
-Do not invent reproduction steps, fabricate stack traces, or claim to have run the program.
-The owner is the slug owner, or the top recent committer for an organization.
-Post one follow-up comment `@`-mentioning the owner and offering to clarify.
-Keep the comment to one or two sentences, ping one account, and never request a deadline.
-Stop after the follow-up comment.
-Stop without posting anything when no bug is found.
+Do not attach patches, diffs, or pull requests to issue.
+Do not invent reproduction steps or fabricate stack traces.
+Do not claim to have run program.
+
+## Owner
+
+Owner is slug owner.
+Owner is top recent committer for organization.
+Post one follow-up comment `@`-mentioning owner and offering to clarify.
+Keep comment to one or two sentences.
+Ping one account, and never request deadline.
+
+## Stopping
+
+Stop after follow-up comment.
+Stop without posting anything when you find no bug.

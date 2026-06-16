@@ -1,61 +1,159 @@
 ---
 name: triage-issue
 description: |
-  Use this skill to triage a single GitHub issue by
-  classifying it and applying labels from the
-  repository's existing label vocabulary.
+  Use this skill when the user wants to triage a single
+  GitHub issue by classifying it and applying labels from
+  the repository's existing label vocabulary.
 ---
 
-Target the GitHub issue the user named as `<owner>/<repo>#<number>`.
-Refuse to classify an issue that is already closed unless the user asked for a retro-label.
-Fetch the issue body, title, labels, author, assignees, linked pull requests, and every comment.
-Stop when the thread already carries a comment from the same account running this skill.
-Stop when the issue author is the same account running this skill.
-Fetch the repository's existing label vocabulary and treat it as the only vocabulary allowed.
+## Scope
+
+Target GitHub issue user named as `<owner>/<repo>#<number>`.
+Refuse to classify issue already closed unless user asked for retro-label.
+Fetch issue body, title, labels, author, assignees, and linked pull requests.
+Fetch every comment on issue.
+
+## Skip
+
+Stop when thread already carries comment from same account running this skill.
+Stop when issue author is same account running this skill.
+
+## Vocabulary
+
+Fetch repository's existing label vocabulary.
+Treat it as only vocabulary allowed.
 Do not invent new labels, rename existing ones, or create missing ones.
-Ask the user to create a missing label instead.
-Map the issue to exactly one primary kind from `bug`, `enhancement`, `question`, `duplicate`, `invalid`, or the repository's closest synonym like `feature`, `improvement`, `support`, or `wontfix`.
+Ask user to create missing label instead.
+
+## Kind
+
+Map issue to exactly one primary kind.
+Choose from `bug`, `enhancement`, `question`, `duplicate`, or `invalid`.
+Or choose repository's closest synonym.
+Synonyms include `feature`, `improvement`, `support`, or `wontfix`.
 Never apply two primary kinds at once.
-Skip the primary-kind label when the report does not clearly fit one kind, the evidence is too thin, or the call belongs to the project architect.
-Post a short comment asking the project architect for a call when the skip needs an architect's input.
-`@`-mention the architect by the login the repository names in `CODEOWNERS`, the README, or a `MAINTAINERS` file.
-Choose `bug` when the report names behavior that contradicts the documented contract, the README, the `CLAUDE.md` rules, or a test the code should satisfy.
-Choose `enhancement` when the report asks for a new behavior, option, integration, or improvement to an existing feature.
-Choose `question` when the report asks how to use the project, configure it, or understand it.
-Redirect the reporter to the README or the discussions forum for a question.
-Choose `duplicate` when the report restates an already-open or recently-closed issue by symptom, file, or proposed fix.
-Name the original issue number when applying `duplicate`.
-Choose `invalid` when the report describes behavior the source code does not support, runs on a platform the project does not target, or is based on a misreading of the documentation.
-Close the issue with reason `not planned` and apply no primary label when the report is obvious spam.
-Post one short comment naming the spam symptom before the close call.
-Add scope labels like `docs`, `tests`, `build`, `ci`, `performance`, `security`, `ui`, or `api` only when the repository defines them and the issue clearly fits.
-Add a severity label only when the repository uses a severity vocabulary and the evidence justifies the level.
-Add a `good first issue` label only when the fix is small, the file is named in the report, the reproduction is clear, and the repository already uses the label.
-Add a `needs-reproduction` label when the report names a symptom but no version, platform, command, or stack trace.
-Never apply labels that demand action by a specific person.
-Never apply priority labels unless the user explicitly asked.
-Post a comment on the issue only when the comment adds value the thread does not already carry.
-Keep the comment tone neutral.
+
+## Skip Kind
+
+Skip primary-kind label when report does not clearly fit one kind.
+Skip primary-kind label when evidence is too thin.
+Skip primary-kind label when call belongs to project architect.
+Post short comment asking project architect for call when skip needs input.
+Mention architect by login repository names in `CODEOWNERS`.
+Or mention architect by login named in README or `MAINTAINERS` file.
+
+## Bug
+
+Choose `bug` when report names behavior that contradicts documented contract.
+Or choose `bug` when report contradicts README or `CLAUDE.md` rules.
+Or choose `bug` when report contradicts test that code must satisfy.
+
+## Enhancement
+
+Choose `enhancement` when report asks for new behavior, option, or integration.
+Or choose `enhancement` when report asks for improvement to existing feature.
+
+## Question
+
+Choose `question` when report asks how to use project.
+Or choose it when report asks how to configure or understand project.
+Redirect reporter to README or discussions forum for question.
+
+## Duplicate
+
+Choose `duplicate` when report restates open or recently-closed issue.
+Match by symptom, file, or proposed fix.
+Name original issue number when applying `duplicate`.
+
+## Invalid
+
+Choose `invalid` when report describes behavior source code does not support.
+Or choose `invalid` when report runs on platform project does not target.
+Or choose `invalid` when report rests on misreading of documentation.
+
+## Spam
+
+Close issue with reason `not planned` and apply no primary label for spam.
+Post one short comment naming spam symptom before close call.
+
+## Scope Labels
+
+Add scope labels only when repository defines them and issue clearly fits.
+Scope labels include `docs`, `tests`, `build`, `ci`, `performance`.
+Scope labels also include `security`, `ui`, or `api`.
+Add severity label only when repository uses severity vocabulary.
+Add severity label only when evidence justifies level.
+
+## Other Labels
+
+Add `good first issue` label only when fix is small.
+Add it only when report names file and gives clear reproduction.
+Add it only when repository already uses label.
+Add `needs-reproduction` label when report names symptom but no version.
+Or add it when report names no platform, command, or stack trace.
+Never apply labels that demand action by specific person.
+Never apply priority labels unless user explicitly asked.
+
+## Comments
+
+Post comment only when comment adds value thread does not already carry.
+Keep comment tone neutral.
 Stay silent when there is nothing important to add.
-React with `+1`, `-1`, `heart`, `hooray`, or `confused` when the agent would otherwise want to praise or push back on a comment or the issue body.
-React on every comment the agent has a stance on, not only the ones that trigger a prose comment.
-Skip the reaction on neutral status updates, bot posts, quoted titles, or routine cross-links.
-Never post a comment that summarizes the issue back, thanks the reporter, restates the chosen label, or acknowledges receipt.
-Ground every prose comment in evidence from the thread and the source code.
-Name the file, function, test, or change a maintainer would touch.
-Cite the README, the contract, or the code when the issue is a question.
-Call out the risks the resolution would carry, like broken tests, behavior changes, backward incompatibility, security exposure, or performance regressions.
-Pass `--repo <owner>/<repo>` to every `gh issue view`, `gh issue edit`, and `gh issue close` call.
-Apply the chosen labels in one call so the change lands as a single edit.
-Remove contradictory labels in the same call rather than across two writes.
-Close the issue with reason `not planned` when the primary kind is `duplicate` or `invalid`.
-Leave the issue open for every other primary kind.
-Post a closing comment before the close call stating the reason in one or two sentences.
-Name the original issue number when closing as `duplicate`.
-Cite the file, documentation, or platform constraint when closing as `invalid`.
-End the closing comment with an invitation to open a new issue if the problem persists.
-Do not reopen the issue, merge it into another, edit its title or body, assign it, set a milestone, or add it to a project board.
-Post one short follow-up comment only when the classification calls for action by the reporter.
-Keep the follow-up comment to one or two sentences.
-Stop after the labels are applied, the optional follow-up comment is posted, and the issue is closed when warranted.
-Report a short factual summary of the issue URL, the primary kind chosen, the scope and severity labels applied, the labels removed, the close state and reason, and the link to the follow-up comment.
+Never post comment that summarizes issue back or thanks reporter.
+Never post comment that restates chosen label or acknowledges receipt.
+
+## Reactions
+
+React with `+1`, `-1`, `heart`, `hooray`, or `confused` on stance.
+React when agent would otherwise praise or push back on comment or issue body.
+React on every comment agent has stance on.
+React beyond only ones that trigger prose comment.
+Skip reaction on neutral status updates or bot posts.
+Skip reaction on quoted titles or routine cross-links.
+
+## Evidence
+
+Ground every prose comment in evidence from thread and source code.
+Name file, function, test, or change maintainer would touch.
+Cite README, contract, or code when issue is question.
+Call out risks resolution would carry.
+Risks include broken tests, behavior changes, or backward incompatibility.
+Risks also include security exposure or performance regressions.
+
+## Edits
+
+Pass `--repo <owner>/<repo>` to every `gh issue view` call.
+Pass `--repo <owner>/<repo>` to every `gh issue edit` call.
+Pass `--repo <owner>/<repo>` to every `gh issue close` call.
+Apply chosen labels in one call so change lands as single edit.
+Remove contradictory labels in same call rather than across two writes.
+
+## Closing
+
+Close issue with reason `not planned` when primary kind is `duplicate`.
+Or close it when primary kind is `invalid`.
+Leave issue open for every other primary kind.
+Post closing comment before close call.
+State reason in one or two sentences.
+Name original issue number when closing as `duplicate`.
+Cite file, documentation, or platform constraint when closing as `invalid`.
+End closing comment with invitation to open new issue if problem persists.
+
+## Restraint
+
+Do not reopen issue, merge it into another, or edit its title or body.
+Do not assign it, set milestone, or add it to project board.
+
+## Follow-up
+
+Post one short follow-up comment only when classification calls for action.
+Action means reporter must act.
+Keep follow-up comment to one or two sentences.
+
+## Finish
+
+Stop after you apply labels and post optional follow-up comment.
+Stop after issue is closed when warranted.
+Report short factual summary of issue URL and primary kind chosen.
+Report scope and severity labels applied, and labels removed.
+Report close state and reason, and link to follow-up comment.

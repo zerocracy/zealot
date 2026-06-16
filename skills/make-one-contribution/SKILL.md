@@ -1,91 +1,146 @@
 ---
 name: make-one-contribution
 description: |
-  Use this skill as the daily entry point for a
+  Use this skill when the user wants to run the daily entry point for a
   contribution chain against a list of GitHub orgs and
   users, walking five ordered phases and delegating
   each to its sub-skill.
 ---
 
-Read `CONVENTIONS.md` at the root of this plugin before doing anything else.
-Hold every rule in `CONVENTIONS.md` as binding for the rest of the run.
-Pass `CONVENTIONS.md` to every delegated sub-skill as the canonical source of voice, signature, tooling, and Markdown rules.
-Read the input as a single list of GitHub accounts in `<login>` form.
-Refuse to run when the list is empty or missing.
+## Conventions
+
+Read `CONVENTIONS.md` at root of this plugin before doing anything else.
+Hold every rule in `CONVENTIONS.md` as binding for rest of run.
+Pass `CONVENTIONS.md` to every delegated sub-skill.
+Treat it as canonical source of voice, signature, tooling, and Markdown rules.
+
+## Input
+
+Read input as single list of GitHub accounts in `<login>` form.
+Refuse to run when list is empty or missing.
 Do not invent entries from memory.
-Enumerate the public, non-archived, non-fork repositories owned by each account, and take the union as the repository set for the rest of the run.
-Identify the current GitHub login once and capture it for the run.
-Ignore every issue whose `labels` array contains `wontfix`, `invalid`, or `duplicate` for the entire run.
-Never comment, react, push a commit, or open a pull request against an ignored issue.
-Treat the submitted pull request as the ultimate goal of the run.
-Advance silently to the next phase when a preliminary phase finds no target.
+Enumerate public, non-archived, non-fork repositories owned by each account.
+Take union as repository set for rest of run.
+Identify current GitHub login once and capture it for run.
 
-## Pick a single repository for the chain
+## Exclusions
 
-Pick a random repository carrying at least one open issue labeled `help wanted`, `bug`, or `enhancement` that is unassigned and not authored by the current login.
-Fall back to a random repository in the set when no repository carries an actionable pull request target.
-Operate on the chosen repository for every phase of the chain.
+Ignore every issue whose `labels` array contains `wontfix` or `invalid`.
+Ignore every issue whose `labels` array contains `duplicate`.
+Hold that exclusion for entire run.
+Never comment, react, push commit, or open pull request against ignored issue.
+Treat submitted pull request as ultimate goal of run.
+Advance silently to next phase when preliminary phase finds no target.
 
-## Phase 1: respond to every inbound comment
+## Selection
 
-Fetch the unread notifications addressed to the current login and filter them down to the chosen repository.
-Keep only entries whose `reason` is `mention`, `review_requested`, `comment`, or `author`, and whose `subject.type` is `Issue`, `PullRequest`, or `PullRequestReview`.
-For each surviving notification, fetch the source comment from the matching endpoint.
-Locate the most recent comment authored by a login other than the current login that mentions the current login or sits on a thread the current login already participated in.
-Discard a notification when the latest comment was authored by the current login, the bot that opened the pull request, or `github-actions[bot]` echoing CI status.
-Discard a notification when the latest comment from another user has already been answered in-thread by the current login with a reply or a referenced commit.
-Delegate to `respond-to-comment` once with the oldest surviving comment.
-Wait for the sub-skill to finish, re-scan the notifications against fresh GitHub state, and delegate again for the next oldest surviving comment.
-Repeat until no comment survives the filters.
-Advance to Phase 2 when no comment survives the filters.
+Pick random repository carrying at least one actionable open issue.
+Count `help wanted`, `bug`, and `enhancement` as actionable labels.
+Require that issue to be unassigned and not authored by current login.
+Fall back to random repository in set when none carries actionable target.
+Operate on chosen repository for every phase of chain.
 
-## Phase 2: triage every unlabeled issue
+## Comments
 
-Fetch the open issues sorted by creation date.
+Fetch unread notifications addressed to current login.
+Filter them down to chosen repository.
+Keep entries whose `reason` is `mention`, `review_requested`, `comment`.
+Keep entries whose `reason` is `author`.
+Keep ones whose `subject.type` is `Issue`, `PullRequest`, `PullRequestReview`.
+For each surviving notification, fetch source comment from matching endpoint.
+Locate most recent comment authored by login other than current login.
+Keep that comment when it mentions current login.
+Keep that comment when it sits on thread current login already joined.
+
+## Filters
+
+Discard notification when latest comment came from current login.
+Discard notification when latest comment came from bot that opened pull request.
+Discard notification when `github-actions[bot]` posted last comment echoing CI.
+Discard notification once current login already answered that other user.
+Count in-thread reply or referenced commit as such answer.
+
+## Replies
+
+Delegate to `respond-to-comment` once with oldest surviving comment.
+Wait for that sub-skill to finish.
+Re-scan notifications against fresh GitHub state.
+Delegate again for next oldest surviving comment.
+Repeat until no comment survives filters.
+Advance to Phase 2 when no comment survives filters.
+
+## Triage
+
+Fetch open issues sorted by creation date.
 Select every issue whose `labels` array is empty.
-Delegate to `triage-issue` once with the oldest unlabeled issue.
-Wait for the sub-skill to finish, re-fetch the open issue list, and delegate again for the next oldest unlabeled issue.
+Delegate to `triage-issue` once with oldest unlabeled issue.
+Wait for `triage-issue` to finish.
+Re-fetch open issue list.
+Delegate again for next oldest unlabeled issue.
 Repeat until no unlabeled issue remains.
 Advance to Phase 3 when no unlabeled issue remains.
 
-## Phase 3: review every open pull request
+## Reviews
 
-Fetch the open pull requests sorted by creation date.
-Select every pull request not authored by the current login, not authored by a bot, and not already reviewed by the current login on its current head commit.
-Treat a pull request as bot-authored when `author.is_bot` is `true`, the login ends in `[bot]` or starts with `app/`, the `author.type` is `Bot`, or the login matches a known automation account like `renovate[bot]`, `dependabot[bot]`, `github-actions[bot]`, `pre-commit-ci[bot]`, `mergify[bot]`, or `greenkeeper[bot]`.
-Delegate to `review-pull-request` once with the oldest reviewable pull request.
-Wait for the sub-skill to finish, re-fetch the pull request list, and delegate again for the next oldest reviewable pull request.
+Fetch open pull requests sorted by creation date.
+Select every pull request whose author is not current login.
+Skip every pull request authored by bot.
+Skip every pull request current login already reviewed on its head commit.
+Delegate to `review-pull-request` once with oldest reviewable pull request.
+Wait for `review-pull-request` to finish.
+Re-fetch pull request list.
+Delegate again for next oldest reviewable pull request.
 Repeat until no reviewable pull request remains.
 Advance to Phase 4 when no reviewable pull request remains.
 
-## Phase 4: file one bug report
+## Bots
 
-Delegate to `file-bug-report` once with the chosen repository slug.
-Let the sub-skill pick the defect itself by reading the source tree.
-Do not pass a defect, do not run the build, and do not pre-screen findings.
-Advance to Phase 5 after the sub-skill finishes.
+Treat pull request as bot-authored when `author.is_bot` is `true`.
+Treat pull request as bot-authored when login ends in `[bot]`.
+Treat pull request as bot-authored when login starts with `app/`.
+Treat pull request as bot-authored when `author.type` is `Bot`.
+Treat pull request as bot-authored when login matches known automation account.
+Count `renovate[bot]`, `dependabot[bot]`, `github-actions[bot]` as such.
+Count `pre-commit-ci[bot]`, `mergify[bot]`, `greenkeeper[bot]` as such accounts.
 
-## Phase 5: submit one pull request
+## Bug
 
-Pick the oldest open issue labeled `help wanted` that is unassigned, not authored by the current login, and has no claimed work in the thread.
-Fall back to the oldest open issue labeled `bug` or `enhancement` under the same conditions when no `help wanted` candidate remains.
-Skip every open issue authored by the current login when picking the pull request target.
-Prepare the working tree before delegating to `submit-pull-request`.
-Clone the chosen repository or pull inside an existing clone.
-Check out a feature branch off the default branch named after the picked target.
-Implement the smallest fix that resolves the picked issue end to end.
-Commit the change with a message that follows `make-git-commit`.
-Delegate to `submit-pull-request` once with the picked target as `<owner>/<repo>#<number>` and the prepared feature branch.
-Stop the run after `submit-pull-request` finishes.
-Re-run this skill from the top for the next pass.
+Delegate to `file-bug-report` once with chosen repository slug.
+Let sub-skill pick defect itself by reading source tree.
+Do not pass defect, do not run build, and do not pre-screen findings.
+Advance to Phase 5 after sub-skill finishes.
 
-## Sub-skill delegation rules
+## Target
 
-Pass the canonical conventions from `CONVENTIONS.md` to every delegated sub-skill.
-Delegate to one sub-skill at a time and wait for it to finish before starting the next.
+Pick oldest open issue that carries `help wanted` and lacks any assignee.
+Require that issue to carry no claimed work in thread.
+Require current login to hold no authorship over that issue.
+Fall back to oldest open issue labeled `bug` or `enhancement` under same rules.
+Apply that fallback only when no `help wanted` candidate remains.
+Skip every open issue current login wrote when picking pull request target.
+
+## Submission
+
+Prepare working tree before delegating to `submit-pull-request`.
+Clone chosen repository or pull inside existing clone.
+Check out feature branch off default branch named after picked target.
+Implement smallest fix that resolves picked issue end to end.
+Commit change with message that follows `make-git-commit`.
+Delegate to `submit-pull-request` once with prepared feature branch.
+Pass picked target as `<owner>/<repo>#<number>` to that delegation.
+Stop run after `submit-pull-request` finishes.
+Re-run this skill from top for next pass.
+
+## Delegation
+
+Pass canonical conventions from `CONVENTIONS.md` to every delegated sub-skill.
+Delegate to one sub-skill at time.
+Wait for it to finish before starting next.
 Let each delegated sub-skill enforce its own contract.
-Treat a sub-skill that reports no actionable target as a silent skip.
+Treat sub-skill that reports no actionable target as silent skip.
 
 ## Report
 
-Report a short factual summary per phase, including the artifact URL each sub-skill produced, the reason for any skip, and the chain's final state.
+Report short factual summary per phase.
+Include artifact URL each sub-skill produced.
+Include reason for any skip and chain's final state.
