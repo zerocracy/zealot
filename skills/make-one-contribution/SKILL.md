@@ -46,7 +46,7 @@ Fetch unread notifications addressed to current login.
 Filter them down to chosen repository.
 Keep entries whose `reason` is `mention`, `review_requested`, `comment`.
 Keep entries whose `reason` is `author`.
-Keep ones whose `subject.type` is `Issue`, `PullRequest`, `PullRequestReview`.
+Keep ones whose `subject.type` is `Issue` or `PullRequest`.
 For each surviving notification, fetch source comment from matching endpoint.
 Locate most recent comment authored by login other than current login.
 Keep that comment when it mentions current login.
