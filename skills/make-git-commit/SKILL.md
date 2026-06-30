@@ -2,20 +2,20 @@
 name: make-git-commit
 description: |
   Use this skill when the user wants to create a Git commit following the
-  Conventional Commits 1.0.0 specification.
+  Conventional Commits specification.
 ---
 
 ## Staging
 
 Trust staged state.
-Do not edit files, lint, test, or build before committing.
+Commit straight from staged state, leaving edit, lint, test, and build aside.
 Stage files explicitly with paths user named.
 
 ## Type
 
-Respect Conventional Commits 1.0.0 standard.
+Respect Conventional Commits standard.
 Pick type from standard set.
-Never invent new ones.
+Hold to that standard set.
 
 ## Description
 
@@ -35,8 +35,8 @@ Add `BREAKING CHANGE:` footer when commit introduces incompatible change.
 Keep body to few short sentences.
 Explain motivation and visible effect.
 Omit body when subject says enough.
-Do not pad message with restated diffs, file lists, or obvious summaries.
-Do not bundle unrelated changes into one commit.
+Keep message free of restated diffs, file lists, and obvious summaries.
+Keep each commit to one related change.
 
 ## Footers
 
@@ -45,16 +45,34 @@ Add it only when host needs that token to auto-close ticket on merge.
 
 ## Trailers
 
-Never add `Co-authored-by:` trailer naming Claude, Anthropic, or any agent.
-Never override author or committer identity.
-Never add promotional trailers, signatures, emoji, or `Generated with` lines.
+Keep every `Co-authored-by:` trailer free of Claude, Anthropic, and any agent.
+Leave author and committer identity as Git sets them.
+Keep message free of advertising trailers, signatures, and emoji.
+Keep message free of `Generated with` lines.
 
 ## Safety
 
-Do not bypass hooks or signing unless user asked.
-Do not amend, rebase, force-push, or push to any remote.
+Run hooks and signing as configured unless user asked to bypass them.
+Confine work to one fresh local commit.
+Leave amend, rebase, force-push, and push aside.
 
 ## Verify
 
 Verify commit subject, body, footers, and file set after committing.
 Create new commit on top rather than amending when something is wrong.
+
+## Example
+
+```text
+Input: staged src/parser.rs; ties to issue #214; user says "commit it"
+git commit produces:
+  fix: #214 reject trailing comma in arrays
+
+  The array parser accepted a trailing comma, diverging from the
+  JSON grammar. Tighten the lookahead so a stray comma now fails.
+
+  Closes #214
+
+Verified description leads with #214, stays under 72 chars,
+lowercase, no trailing period; footer auto-closes the issue.
+```
