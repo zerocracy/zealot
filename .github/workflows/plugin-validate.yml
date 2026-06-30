@@ -38,3 +38,17 @@ jobs:
             awk '/^---$/{c++; next} c==1' "$f" | grep -q '^name:' || { echo "$f missing name"; exit 1; }
             awk '/^---$/{c++; next} c==1' "$f" | grep -q '^description:' || { echo "$f missing description"; exit 1; }
           done
+      - name: every SKILL.md name matches its directory and is unique
+        run: |
+          set -e
+          seen=""
+          for d in skills/*/; do
+            dir=$(basename "$d")
+            f="${d}SKILL.md"
+            declared=$(awk '/^---$/{c++; next} c==1' "$f" | grep '^name:' | sed 's/^name: *//')
+            [ "$declared" = "$dir" ] || { echo "$f: name '$declared' does not match directory '$dir'"; exit 1; }
+            case " $seen " in
+              *" $declared "*) echo "$f: duplicate skill name '$declared'"; exit 1 ;;
+            esac
+            seen="$seen $declared"
+          done
