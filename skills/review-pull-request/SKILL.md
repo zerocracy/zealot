@@ -59,9 +59,8 @@ Run full build locally on checked-out branch when project rules expect it.
 
 Decide one verdict from `APPROVE`, `COMMENT`, or `REQUEST_CHANGES`.
 Hold to those three verdicts only.
-Choose `APPROVE` when no inline comment names real defect.
-Choose `APPROVE` when diff respects conventions and tests cover new behavior.
-Choose `APPROVE` when CI is green.
+Choose `APPROVE` only when no inline comment names a real defect,
+  diff respects conventions and tests cover new behavior, and CI is green.
 Choose `REQUEST_CHANGES` when one comment names correctness defect to fix.
 Choose `REQUEST_CHANGES` when one comment names security or contract defect.
 Choose `REQUEST_CHANGES` when diff causes failure that turns CI red.
