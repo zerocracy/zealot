@@ -129,8 +129,9 @@ Leave thread open for reporter when resolution is in dispute.
 ## CI
 
 Watch CI on fix commit.
-Consider comment answered only once every check is green.
-Fix CI failures unrelated to current comment inside same run.
+Fix only CI failures caused by comment fix.
+Report unrelated red checks in reply instead of editing them in same run.
+Consider comment answered once every check caused by fix is green.
 
 ## Forbidden
 
@@ -141,7 +142,7 @@ Limit this skill to existing issues, pull requests, and branches.
 ## Stop
 
 Stop after you answer comment with commit-and-reply pair or `PUSH-BACK` reply.
-Stop only when CI on latest commit is green for pull request fix.
+Stop only when every check caused by fix is green for pull request fix.
 
 ## Report
 
