@@ -126,7 +126,6 @@ Require that issue to carry no claimed work in thread.
 Require current login to hold no authorship over that issue.
 Fall back to oldest open issue labeled `bug` or `enhancement` under same rules.
 Apply that fallback only when no `help wanted` candidate remains.
-Skip every open issue current login wrote when picking pull request target.
 
 ## Submission
 
