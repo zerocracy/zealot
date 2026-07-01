@@ -25,6 +25,8 @@ jobs:
           jq -e '.name and .version' .claude-plugin/plugin.json > /dev/null || { echo "plugin.json missing name or version"; exit 1; }
       - name: validate marketplace.json against schemastore schema
         run: check-jsonschema --schemafile https://json.schemastore.org/claude-code-marketplace.json .claude-plugin/marketplace.json
+      - name: validate plugin.json against schemastore schema
+        run: check-jsonschema --schemafile https://json.schemastore.org/claude-code-plugin-manifest.json .claude-plugin/plugin.json
       - name: every skill directory has a SKILL.md
         run: |
           set -e
