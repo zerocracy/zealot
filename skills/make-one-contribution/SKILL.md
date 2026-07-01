@@ -44,6 +44,7 @@ Operate on chosen repository for every phase of chain.
 
 ## Comments
 
+Clone chosen repository or pull inside existing clone before any delegation.
 Fetch unread notifications addressed to current login.
 Filter them down to chosen repository.
 Keep entries whose `reason` is `mention`, `review_requested`, `comment`.
