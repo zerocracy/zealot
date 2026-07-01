@@ -20,13 +20,21 @@ Re-run build after each conflict resolution.
 Resolve each conflict on its merits.
 Leave `--skip`, `-X ours`, and `-X theirs` aside.
 
+## Fork
+
+Check current login's permission on target repository.
+Fork target repository with `gh repo fork --remote` when permission lacks push.
+Add fork as push remote when fork created.
+Record fork owner as head owner when fork created.
+Record target repository as head owner otherwise.
+
 ## Build
 
 Run full build before pushing branch.
 Run every test, every linter, and every static check named in `README.md`.
 Run every check named in `CLAUDE.md` too.
 Stabilize build before pushing branch.
-Push branch.
+Push branch to fork remote when fork created, to origin otherwise.
 Confirm push succeeded before opening pull request.
 
 ## Title
@@ -52,6 +60,8 @@ Keep body compact.
 ## Options
 
 Set base and head branches explicitly even when they match defaults.
+Pass `--head <fork-owner>:<branch>` when fork created.
+Pass `--head <branch>` otherwise.
 Mark pull request as draft only when user explicitly requested draft.
 Leave ready-for-review for user to set.
 Request reviewers only when user explicitly asked.

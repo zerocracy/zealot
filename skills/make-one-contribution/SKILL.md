@@ -128,6 +128,7 @@ Skip every open issue current login wrote when picking pull request target.
 
 Prepare working tree before delegating to `submit-pull-request`.
 Clone chosen repository or pull inside existing clone.
+Fork chosen repository via `gh repo fork --remote` when login lacks push access.
 Check out feature branch off default branch named after picked target.
 Implement smallest fix that resolves picked issue end to end.
 Commit change with message that follows `make-git-commit`.
