@@ -61,7 +61,8 @@ Discard notification when latest comment came from current login.
 Discard notification when latest comment came from pull request author.
 Discard notification when latest comment came from issue author.
 Discard notification when latest comment came from bot that opened pull request.
-Discard notification when `github-actions[bot]` posted last comment echoing CI.
+Discard notification when latest comment came from bot under Bots signature.
+Count `github-actions[bot]` echoing CI as one example under that signature.
 Discard notification once current login already answered that other user.
 Count in-thread reply or referenced commit as such answer.
 
