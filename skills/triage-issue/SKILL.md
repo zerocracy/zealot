@@ -126,6 +126,7 @@ Risks also include security exposure or performance regressions.
 Pass `--repo <owner>/<repo>` to every `gh issue view` call.
 Pass `--repo <owner>/<repo>` to every `gh issue edit` call.
 Pass `--repo <owner>/<repo>` to every `gh issue close` call.
+Pass `--repo <owner>/<repo>` to every `gh issue comment` call.
 Apply chosen labels in one call so change lands as single edit.
 Remove contradictory labels in same call rather than across two writes.
 
