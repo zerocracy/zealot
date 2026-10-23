@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.14'
-      - run: pip install check-jsonschema
+      - run: pip install check-jsonschema==0.38.2
       - name: plugin.json parses and declares name + version
         run: |
           jq -e '.name and .version' .claude-plugin/plugin.json > /dev/null || { echo "plugin.json missing name or version"; exit 1; }
