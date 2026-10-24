@@ -17,7 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - id: get_actionlint
-        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash)
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/download-actionlint.bash" https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash
+          echo "72fa3e45ac20f3c3a512d6747b4fcf719e21f890e8c43e78d48a41fdfb900c4e  $RUNNER_TEMP/download-actionlint.bash" | sha256sum -c -
+          bash "$RUNNER_TEMP/download-actionlint.bash"
         shell: bash
       - run: ${{ steps.get_actionlint.outputs.executable }} -color
         shell: bash
