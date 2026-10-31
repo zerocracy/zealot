@@ -102,6 +102,7 @@ Owner is slug owner.
 Owner is top recent committer for organization.
 Post one follow-up comment `@`-mentioning owner and offering to clarify.
 Keep comment to one or two sentences.
+State comment directly, without pleasantry or hedging.
 Ping one account, and never request deadline.
 
 ## Stopping
@@ -127,7 +128,7 @@ New issue opened: yegor256/cactoos#1899
     UncheckedIOException so the caller sees the fault.
 
 Follow-up comment on #1899:
-  @yegor256 happy to clarify the reproduction if useful.
+  @yegor256 ask here if the reproduction needs more detail.
 
 Stopped after the comment.
 ```
