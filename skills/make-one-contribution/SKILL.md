@@ -93,7 +93,8 @@ Advance to reviews phase when no unlabeled issue remains.
 Fetch open pull requests sorted by creation date.
 Select every pull request whose author is not current login.
 Skip every pull request authored by bot.
-Skip every pull request current login already reviewed on its head commit.
+Skip every pull request whose `mergeable` field reads `CONFLICTING`.
+Skip every pull request that already carries submitted review.
 Delegate to `review-pull-request` once with oldest reviewable pull request.
 Wait for `review-pull-request` to finish.
 Re-fetch pull request list.
