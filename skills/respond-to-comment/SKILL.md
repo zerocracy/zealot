@@ -21,6 +21,7 @@ Stop when working directory has staged hunks.
 
 ## Checkout
 
+Check current login's push access to pull request head branch before checkout.
 Check out pull request branch locally for pull request comment.
 Pull latest state.
 Stay on default branch for issue comment.
@@ -84,6 +85,7 @@ Choose `PUSH-BACK` when comment duplicates feedback already addressed.
 ## Fix Work
 
 For `FIX` on pull request, edit source by hand.
+Skip edit, build, and commit for `FIX` on pull request without push access.
 Change only what comment demands.
 Leave unrelated refactors, renames, and style untouched under same edit.
 For `FIX` on issue, gather missing information reporter asked for.
@@ -108,6 +110,7 @@ Push branch after commit.
 
 Reply to comment on same thread no matter outcome.
 For `FIX` on pull request, post reply naming commit `SHA` and change.
+For `FIX` without push access, post reply stating change instead.
 For `FIX` on issue, post requested info or link to follow-up pull request.
 For `PUSH-BACK`, post short reply stating technical reason.
 Cite project rule, scope boundary, or misreading.
