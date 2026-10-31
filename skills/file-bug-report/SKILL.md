@@ -98,8 +98,8 @@ Speak only to what reading source shows.
 
 ## Owner
 
-Owner is slug owner.
-Owner is top recent committer for organization.
+Owner is slug owner when slug owner type is user.
+Owner is top recent committer when slug owner type is organization.
 Post one follow-up comment `@`-mentioning owner and offering to clarify.
 Keep comment to one or two sentences.
 Ping one account, and never request deadline.
