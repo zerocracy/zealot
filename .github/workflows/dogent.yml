@@ -10,6 +10,8 @@ name: dogent
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   dogent:
     timeout-minutes: 15

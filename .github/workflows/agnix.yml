@@ -10,6 +10,8 @@ name: agnix
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   agnix:
     timeout-minutes: 15
