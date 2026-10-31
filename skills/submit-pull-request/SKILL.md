@@ -71,7 +71,7 @@ Leave open pull request untouched by merge, approve, auto-merge, and force-push.
 ## CI
 
 Capture pull request URL.
-Watch CI once so first-build failure surfaces inside run.
+Watch CI on every pushed commit so each failure surfaces inside run.
 Fix CI failures inside this run.
 Commit and push additional commits to same branch.
 Count pull request as submitted once every required check turns green.
