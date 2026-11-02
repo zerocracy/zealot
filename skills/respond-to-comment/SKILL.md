@@ -34,7 +34,7 @@ Locate exact comment by its id.
 ## Skip
 
 Discard run when comment is from pull request author.
-Discard run when comment is from issue author.
+Discard run when comment is from current login.
 Discard run when comment is from bot that opened pull request.
 Discard run when `github-actions[bot]` merely echoes CI status.
 Treat suggestions from `copilot-pull-request-reviewer` as comments to answer.
