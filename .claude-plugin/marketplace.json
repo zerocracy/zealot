@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "description": "Skills for disciplined GitHub workflows",
   "name": "zealot",
   "owner": {
     "email": "yegor256@gmail.com",
