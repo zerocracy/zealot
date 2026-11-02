@@ -1,12 +1,13 @@
 ---
 name: make-git-commit
-disable-model-invocation: true
 description: |
   Use this skill when the user wants to create a Git commit following the
   Conventional Commits specification.
 ---
 
 ## Staging
+
+Commit only when user or calling skill explicitly requests it.
 
 Trust staged state.
 Commit straight from staged state, leaving edit, lint, test, and build aside.

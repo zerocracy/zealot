@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+# This skill accepts explicit user requests and delegation from the orchestrator.
+# Disabling model invocation would block the contribution chain.
+[[overrides]]
+paths = ["skills/make-git-commit/SKILL.md"]
+disabled_rules = ["CC-SK-006"]
