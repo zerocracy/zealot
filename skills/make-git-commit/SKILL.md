@@ -52,6 +52,7 @@ Keep message free of `Generated with` lines.
 
 ## Safety
 
+Commit only when user authorized commit for staged changes.
 Run hooks and signing as configured unless user asked to bypass them.
 Confine work to one fresh local commit.
 Leave amend, rebase, force-push, and push aside.
