@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Yegor Bugayenko
+# SPDX-License-Identifier: MIT
+
+# make-one-contribution uses this skill for authorized commits.
+# Keep model invocation available and require authorization in the skill.
+[[overrides]]
+paths = ["skills/make-git-commit/SKILL.md"]
+disabled_rules = ["CC-SK-006"]

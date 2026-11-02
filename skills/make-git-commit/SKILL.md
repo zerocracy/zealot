@@ -1,6 +1,5 @@
 ---
 name: make-git-commit
-disable-model-invocation: true
 description: |
   Use this skill when the user wants to create a Git commit following the
   Conventional Commits specification.
@@ -53,6 +52,7 @@ Keep message free of `Generated with` lines.
 
 ## Safety
 
+Commit only when user authorized commit for staged changes.
 Run hooks and signing as configured unless user asked to bypass them.
 Confine work to one fresh local commit.
 Leave amend, rebase, force-push, and push aside.
