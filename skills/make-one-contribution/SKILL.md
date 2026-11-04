@@ -60,7 +60,6 @@ Keep that comment when it sits on thread current login already joined.
 
 Discard notification when latest comment came from current login.
 Discard notification when latest comment came from pull request author.
-Discard notification when latest comment came from issue author.
 Discard notification when latest comment came from bot that opened pull request.
 Discard notification when latest comment came from bot under Bots signature.
 Count `github-actions[bot]` echoing CI as one example under that signature.

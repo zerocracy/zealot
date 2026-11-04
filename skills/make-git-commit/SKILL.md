@@ -7,6 +7,8 @@ description: |
 
 ## Staging
 
+Commit only when user or calling skill explicitly requests it.
+
 Trust staged state.
 Commit straight from staged state, leaving edit, lint, test, and build aside.
 Stage files explicitly with paths user named.
